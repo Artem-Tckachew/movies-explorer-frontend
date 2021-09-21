@@ -1,0 +1,47 @@
+.header {
+    padding: 18px 70px;
+    background: #202020;
+  }
+
+.header__content {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__films{
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-column-gap: 16px;
+    align-items: center;
+}
+
+.header__accaunt{
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-column-gap: 17px;
+    align-items: center;
+}
+  
+.profile__logo {
+    background-image: url('../../../images/logo_movie.svg');
+    background-color: #313131;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 26px;
+    height: 30px;
+}
+
+.header__link {
+    color: white;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-decoration-line: underline;
+    margin: 0;
+}
