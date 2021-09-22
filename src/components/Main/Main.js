@@ -1,13 +1,12 @@
 import React from 'react';
 import Promo from './Promo/Promo';
-import Header from '../Main/Header/Header';
-
+import AboutProject from './AboutProject/AboutProject';
 
 function Main() {
   return(
     <main>
-      <Header />
       <Promo />
+      <AboutProject />
     </main>
   );
 }

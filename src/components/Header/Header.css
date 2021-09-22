@@ -1,6 +1,28 @@
 .header {
     padding: 18px 70px;
-    background: #202020;
+    background: black;
+  }
+
+.header__link_active {
+    background-color: #3DDC84;
+    padding: 8px 20px;
+    color: black;
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+
+.header__button:first-of-type {
+    margin-left: 0;
+}
+.header_type_promo {
+    background: #073042;
+    align-items: center;
   }
 
 .header__content {
@@ -26,7 +48,7 @@
 }
   
 .profile__logo {
-    background-image: url('../../../images/logo_movie.svg');
+    background-image: url('../../images/logo_movie.svg');
     background-color: #313131;
     background-repeat: no-repeat;
     background-position: center;
@@ -42,6 +64,12 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
-    text-decoration-line: underline;
+    text-decoration: none;
     margin: 0;
+}
+
+.header__link_active {
+    background-color: #3DDC84;
+    color: black;
+    border-radius: 3px;
 }
