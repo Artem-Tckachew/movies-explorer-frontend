@@ -36,6 +36,11 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
+  transition: 1s opacity ease;
+}
+
+.promo__link:hover{
+  opacity: .7;
 }
   
 .promo__link:last-of-type {

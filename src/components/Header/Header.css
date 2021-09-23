@@ -66,10 +66,9 @@
     line-height: 16px;
     text-decoration: none;
     margin: 0;
+    transition: 1s opacity ease;
 }
 
-.header__link_active {
-    background-color: #3DDC84;
-    color: black;
-    border-radius: 3px;
+.header__link:hover {
+    opacity: .7;
 }

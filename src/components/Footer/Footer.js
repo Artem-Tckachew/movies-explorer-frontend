@@ -1,11 +1,11 @@
 import './Footer.css';
 
 function Footer() {
-  return (
-    <footer className="footer">
+	return (
+		<footer className="footer">
 			<p className="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
 			<div className="footer__container">
-				<p className="footer__copyright">© 2021</p>
+				<p className="footer__copyright">© {new Date().getFullYear()}</p>
 				<nav className="footer__menu">
 					<ul className="footer__list">
 						<li className="footer__item">
@@ -20,8 +20,8 @@ function Footer() {
 					</ul>
 				</nav>
 			</div>
-    </footer>
-  );
+		</footer>
+	);
 }
 
 export default Footer;

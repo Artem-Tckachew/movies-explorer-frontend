@@ -7,7 +7,7 @@ import Portfolio from './Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 
 function Main() {
-  return(
+  return (
     <main className="Main">
       <Promo />
       <AboutProject />
