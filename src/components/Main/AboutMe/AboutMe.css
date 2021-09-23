@@ -1,0 +1,85 @@
+.about-me {
+	max-width: 1140px;
+    padding: 0 70px;
+	margin: 0 auto;
+    background: #202020;
+}
+.about-me__header {
+	font-weight: normal;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+	font-size: 22px;
+	line-height: 27px;
+	letter-spacing: -0.04em;
+	padding: 110px 0 23px;
+	margin: 0;
+    color: #FFFFFF;
+	border-bottom: 1px #DADADA solid;
+}
+.about-me__container {
+	display: flex;
+	flex-direction: row;
+	margin: 66px 0 0;
+    padding: 0 0 100px;
+	justify-content: space-between;
+}
+.about-me__info-container {
+	width: 600px;
+	max-width: 60%;
+}
+.about-me__name {
+	margin: 0;
+	padding: 0;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+	font-size: 50px;
+	line-height: 58px;
+	letter-spacing: -0.04em;
+    color: #FFFFFF;
+}
+.about-me__profession {
+	margin: 18px 0 0;
+	padding: 0;
+    color: #FFFFFF;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+	font-size: 18px;
+	line-height: 20px;
+}
+.about-me__text {
+	margin: 26px 0 99px;
+	padding: 0;
+    color: #FFFFFF;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+	font-size: 14px;
+	line-height: 22px;
+	
+}
+.about-me__link {
+	color: #FFFFFF;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+	text-decoration: none;
+    font-size: 14px;
+    line-height: 17px;
+	margin: 0 10px 0 0;
+	opacity: 1;
+	transition: 1s opacity ease;
+}
+.about-me__link:hover {
+	opacity: 0.7;
+}
+.about-me__avatar {
+	border-radius: 10px;
+	width: 270px;
+	height: 327px;
+	background-image: url('../../../images/avatar.jpg');
+	background-size: cover;
+	background-position: left;
+}
