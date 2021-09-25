@@ -5,14 +5,7 @@
 
 .header__link_active {
     background-color: #3DDC84;
-    padding: 8px 20px;
-    color: black;
-    font-family: Inter, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    text-decoration: none;
+    padding: 8px 19px;
     border-radius: 3px;
 }
 
@@ -43,7 +36,7 @@
 .header__accaunt{
     display: grid;
     grid-template-columns: repeat(2, max-content);
-    grid-column-gap: 17px;
+    grid-column-gap: 30px;
     align-items: center;
 }
   
@@ -61,7 +54,6 @@
     font-family: Inter, sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-weight: 500;
     font-size: 13px;
     line-height: 16px;
     text-decoration: none;
@@ -71,4 +63,24 @@
 
 .header__link:hover {
     opacity: .7;
+    cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+    .header__link {
+        font-size: 12px;
+    }
+    .header_type_promo {
+        padding: 18px 30px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .header__link {
+        font-size: 10px;
+    }
+    .header_type_promo {
+        padding: 18px 14px;
+    }
+    .header__accaunt{
+        grid-column-gap: 14px;
+    }
 }

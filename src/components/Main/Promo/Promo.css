@@ -4,21 +4,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../../../images/Promo_img.svg');
-  background-repeat: no-repeat;
-  background-position: center;
 }
   
 .promo__title {
   max-width: 730px;
   font-family: Inter, sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 50px;
   line-height: 58px;
   color: #FFFFFF;
   text-align: center;
   letter-spacing: -0.04em;
   margin: 0;
+}
+
+.promo__img{
+  background-image: url('../../../images/Promo_img.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 320px;
+  height: 320px;
+  position: absolute;
+  background-size: contain
 }
   
 .promo__nav {
@@ -41,8 +48,37 @@
 
 .promo__link:hover{
   opacity: .7;
+  cursor: pointer;
 }
   
 .promo__link:last-of-type {
   margin: 0;
+}
+@media screen and (max-width: 768px) {
+  .promo {
+    min-height: 784px;
+  }
+  .promo__title{
+    margin: 0 19px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .promo {
+    min-height: 570px;
+  }
+  .promo__title{
+    margin: 0 10px;
+    font-size: 31px;
+    line-height: 39px;
+  }
+  .promo__img{
+    width: 248px;
+    height: 248px;
+  }
+  .promo__link{
+    font-size: 11px;
+    line-height: 16px;
+    margin-right: 14px;
+  }
 }

@@ -6,6 +6,7 @@ function Promo() {
     <>
       <section className='promo'>
         <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
+        <div className="promo__img"></div>
       </section>
       <nav className="promo__nav">
         <a href="#" className="promo__link">О проекте</a>
