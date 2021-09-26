@@ -22,7 +22,8 @@
   background-image: url('../../../images/Promo_img.svg');
   background-repeat: no-repeat;
   background-position: center;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   height: 320px;
   position: absolute;
   background-size: contain

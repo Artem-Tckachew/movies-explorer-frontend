@@ -46,7 +46,8 @@
   
   .stack {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax( 84px, 90px));
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
     grid-column-gap: 10px;
     padding: 100px 0 0 0;
     margin: 0;
@@ -68,4 +69,51 @@
     color: #FFFFFF;
     border-radius: 10px;
   }
-  
+  @media screen and (max-width: 768px) {
+    .techs {
+      padding: 90px 50px;
+    }
+    .techs__title {
+      padding-top: 80px;
+    }
+    .techs__subtitle {
+      padding-top: 22px;
+      font-size: 12px;
+      line-height: 18px;
+    }
+    .stack {
+      padding-top: 83px;
+    }
+    .stack__item {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .techs {
+      padding: 70px 18px;
+      background: #202020;
+    }
+    .section-title {
+      font-size: 18px;
+      line-height: 22px;
+      padding-bottom: 28px;
+    }
+    .techs__title {
+      border-top: 1px solid  #000000;
+      padding-top: 60px;
+      font-size: 30px;
+      line-height: 36px;
+    }
+    .techs__subtitle {
+      padding-top: 24px;
+      font-size: 11px;
+      line-height: 16px;
+    }
+    .stack {
+      padding-top: 71px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: calc(100% - 142px + 36px);
+    }
+  }

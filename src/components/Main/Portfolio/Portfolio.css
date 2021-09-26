@@ -59,3 +59,33 @@
     border: none;
     padding: 0 0 19px 0;
   }
+  @media screen and (max-width: 768px) {
+    .portfolio {
+      padding: 0 50px 90px 50px;
+    }
+    .project {
+      border-top: 1px solid #E6E6E6;
+    }
+    .project__link{
+      font-size: 28px;
+      line-height: 50px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .portfolio {
+      padding: 0 14px 70px 14px;
+    }
+    .portfolio__title {
+      font-size: 14px;
+      line-height: 20px;
+      padding-bottom: 40px;
+    }
+    .project__link{
+      font-size: 18px;
+      line-height: 28px;
+    }
+    .project__link_type_image {
+      width: 18px;
+      padding: 0;
+    }
+  }
