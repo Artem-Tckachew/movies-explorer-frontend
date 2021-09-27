@@ -1,0 +1,125 @@
+.card {
+	box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+	border-radius: 6px;
+	background-color: #FDFDFD;
+}
+
+.card__pic {
+	width: 100%;
+	height: 203px;
+	object-fit: cover;
+	object-position: center;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+.card__like-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.card__title {
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	margin: 0 0 0 16px;
+	max-width: 250px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  overflow: hidden;
+}
+.card__like_hidden {
+	display: none;
+}
+.card__delete-button {
+	background-image: url("../../../images/delete_movie.svg");
+	height: 30px;
+	width: 30px;
+	margin: 10px 16px;
+	background-color: #FDFDFD;
+	border: none;
+	transition: 0.7s ease opacity;
+	opacity: 0;
+	transition: 0.7s ease transform;
+}
+
+.card:hover .card__delete-button{
+	opacity: 1;
+}
+.card:hover .card__delete-button:hover {
+	transform: scale(1.7);
+	cursor: pointer;
+}
+.card__delete-button_hidden {
+	display: none;
+}
+.card__like {
+	background-image: url("../../../images/save_innactive.svg");
+	height: 30px;
+	width: 30px;
+	margin: 10px 16px;
+	background-color: #FDFDFD;
+	border: none;
+	transition: 0.7s ease opacity;
+	opacity: 1;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.card__like_active {
+	background-image: url("../../../images/save_active.svg");
+}
+.card__like:hover {
+	opacity: 0.7;
+}
+.card__like_hidden {
+	display: none;
+}
+.card__duration {
+	margin: 0 16px 16px;
+	padding: 0;
+	font-weight: normal;
+	font-size: 11px;
+	line-height: 13px;
+	color: #A0A0A0;
+	}
+
+@media screen and (max-width: 1200px) {
+	.card__title {
+		max-width: 200px;
+	}
+}
+@media screen and (max-width: 1000px) {
+	.card__title {
+		max-width: 150px;
+	}
+}
+@media screen and (max-width: 900px) {
+	.card__pic {
+		height: 190px;
+	}
+}
+@media screen and (max-width: 660px) {
+	.card__title {
+		max-width: 150px;
+		font-size: 12px;
+		line-height: 15px;
+		margin-left: 14px;
+	}
+	.card__like {
+		margin: 7px 10px;
+	}
+	.card__delete-button {
+		margin: 7px 10px;
+	}
+	.card__duration {
+		margin: 0 14px 14px;
+		font-size: 10px;
+		line-height: 12px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.card__pic {
+		height: 168px;
+	}
+}
