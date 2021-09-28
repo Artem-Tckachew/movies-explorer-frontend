@@ -1,43 +1,43 @@
 import React from 'react';
-
 import './Movies.css';
-
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList'
 import Preloader from './Preloader/Preloader'
+import Footer from '../Footer/Footer'
 
-function Movies(props) {
+function Movies() {
 	const [isLoading, setIsLoading] = React.useState(true);
 	setTimeout(()=>{setIsLoading(false)}, 3000)
 	const cards = [
 		{
-			"image" : "https://1.bp.blogspot.com/-cjb05a6KJic/VvgkO8Xwj5I/AAAAAAAAKB8/7LNDCdac4B4scVhNikEXETNtSTr1vqymA/s1600/%25D0%259A%25D1%2580%25D0%25B8%25D0%25BC%25D0%25B8%25D0%25BD%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25BE%25D0%25B5%2B%25D1%2587%25D1%2582%25D0%25B8%25D0%25B2%25D0%25BE.jpg", 
-			"duration": 110,
-			"nameRU": "Криминальное чтиво"
+			"image" : "https://proprikol.ru/wp-content/uploads/2020/09/kartinki-mstiteli-27.jpg", 
+			"duration": 137,
+			"nameRU": "Мстители"
 		},
 		{
-			"image" : "https://1.bp.blogspot.com/-cjb05a6KJic/VvgkO8Xwj5I/AAAAAAAAKB8/7LNDCdac4B4scVhNikEXETNtSTr1vqymA/s1600/%25D0%259A%25D1%2580%25D0%25B8%25D0%25BC%25D0%25B8%25D0%25BD%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25BE%25D0%25B5%2B%25D1%2587%25D1%2582%25D0%25B8%25D0%25B2%25D0%25BE.jpg", 
-			"duration": 110,
-			"nameRU": "Криминальное чтивочтивочтивочтивочтивочтивочтиво"
+			"image" : "https://pic.rutube.ru/video/6f/8d/6f8da78b42ffb66d69e955a46bf703e1.jpg", 
+			"duration": 143,
+			"nameRU": "Трансформеры"
 		},
 		{
-			"image" : "https://1.bp.blogspot.com/-cjb05a6KJic/VvgkO8Xwj5I/AAAAAAAAKB8/7LNDCdac4B4scVhNikEXETNtSTr1vqymA/s1600/%25D0%259A%25D1%2580%25D0%25B8%25D0%25BC%25D0%25B8%25D0%25BD%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25BE%25D0%25B5%2B%25D1%2587%25D1%2582%25D0%25B8%25D0%25B2%25D0%25BE.jpg", 
-			"duration": 110,
-			"nameRU": "Криминальное чтиво"
+			"image" : "https://proprikol.ru/wp-content/uploads/2020/09/kartinki-mstiteli-27.jpg", 
+			"duration": 137,
+			"nameRU": "МстителиМстителиМстителиМстители"
 		},
 		{
-			"image" : "https://1.bp.blogspot.com/-cjb05a6KJic/VvgkO8Xwj5I/AAAAAAAAKB8/7LNDCdac4B4scVhNikEXETNtSTr1vqymA/s1600/%25D0%259A%25D1%2580%25D0%25B8%25D0%25BC%25D0%25B8%25D0%25BD%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25BE%25D0%25B5%2B%25D1%2587%25D1%2582%25D0%25B8%25D0%25B2%25D0%25BE.jpg", 
-			"duration": 110,
-			"nameRU": "Криминальное чтивочтивочтивочтивочтивочтивочтиво"
+			"image" : "https://pic.rutube.ru/video/6f/8d/6f8da78b42ffb66d69e955a46bf703e1.jpg", 
+			"duration": 143,
+			"nameRU": "ТрансформерыТрансформерыТрансформеры"
 		}
 	]
 
   return (
-    <div className="movies-main">
+    <div className="movies">
 			<SearchForm/>
 			{!isLoading?
 			(<MoviesCardList isSaved={false} cards={cards} />):
 			(<Preloader/>)}
+			<Footer/>
     </div>
   );
 }

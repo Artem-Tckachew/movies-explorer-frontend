@@ -1,20 +1,25 @@
 import './SearchForm.css'
 function SearchForm() {
-  return (
-    <section className="search">
+	return (
+		<section className="search">
 			<form className="search__form">
-				<div className="search__input-container">
-					<input className="search__input" name="film" id="film" placeholder="Фильм"/>
-					<button type="submit" className="search__submit-button">Поиск</button>
+				<div className="search__input-box">
+					<input className="search__input" name="film" id="film" placeholder="Фильм" />
+					<button type="submit" className="search__submit"></button>
 				</div>
-				<label className="search__switch">
-					<input className="search__checkbox" type="checkbox" name="short" id="short"></input>
-					<span className="search__slider"></span>
-					<span className="search__checkbox-title">Короткометражки</span>
-				</label>
+				<div className="filter-checkbox">
+					<label className="filter-checkbox__switch">
+						<input
+							className="filter-checkbox__checkbox"
+							type="checkbox"
+						/>
+						<span className="filter-checkbox__round"></span>
+					</label>
+					<p className="filter-checkbox__title">Короткометражки</p>
+				</div>
 			</form>
-    </section>
-  );
+		</section>
+	);
 }
 
 export default SearchForm;
