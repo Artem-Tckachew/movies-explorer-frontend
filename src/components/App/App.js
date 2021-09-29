@@ -15,6 +15,7 @@ function App() {
       <Header />
       <Switch>
         <Route exat path='/'>
+        <Movies />
         <Main />
         </Route>
         <Route path='/movies'>

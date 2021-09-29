@@ -1,42 +1,47 @@
-import React from 'react';
 import './Header.css';
-import logo from '../../images/logo.svg';
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import React from 'react';
 
-const isLogged = false;
+function Header(props) {
+	const [popupOpened, setPopupOpened] = React.useState(false)
+	function handleOpenMenu() {
+		setPopupOpened(!popupOpened)
+	}
 
-function Header() {
   return (
-    <header className={isLogged ? "header" : "header header_type_promo"}>
-      {isLogged ?
-        <><nav className="header__content">
-          <img src={logo} alt="logo" />
-          <li className="header__films">
-            <a href="#" className="header__link">Фильмы</a>
-            <a href="#" className="header__link">Сохранённые фильмы</a>
-          </li>
-          <li className="header__accaunt">
-            <a href="#" className="header__link">Аккаунт</a>
-            <div className="profile__logo"></div>
-          </li>
-        </nav>
-          <div className="profile__logo"></div></>
-        : <nav className="header__content">
-          <img src={logo} alt="logo" />
-          <li className="header__accaunt">
-            <Link className='header__link' to="/signup">
-              Регистрация
-            </Link>
-            <Link className='header__link header__link_active' to="/signin">
-              Войти
-            </Link>
-          </li>
-        </nav>
-      }
-
+		props.isAuthed?(<header className="header">
+			<nav className="header__container">
+					<Link to="/" className="header__logo"></Link>
+					<div className="header__links">
+						<NavLink to="/movies" activeClassName="header__link_active" className="header__link">Фильмы</NavLink>
+						<NavLink to="/saved-movies" activeClassName="header__link_active" className="header__link">Сохраненные фильмы</NavLink>
+					</div>
+					<div className="header__accaunt-container">
+						<Link to="/profile" className="header__profile-link header__profile-link_screen_full">Аккаунт<span className="header__profile-img header__profile-img_screen_full"></span></Link>
+						<button className="header__burger" onClick={handleOpenMenu}></button>
+					</div>
+			</nav>
+			<div className={`header__popup ${popupOpened?'':'header__popup_closed'}`}>
+				<nav className="header__menu">
+					<button className="header__close-button" onClick={handleOpenMenu}></button>
+					<div className="header__links-container">
+						<NavLink exact to="/" activeClassName="header__link_active" className="header__link">Главная</NavLink>
+						<NavLink to="/movies" activeClassName="header__link_active" className="header__link" onClick={handleOpenMenu}>Фильмы</NavLink>
+						<NavLink to="/saved-movies" activeClassName="header__link_active" className="header__link" onClick={handleOpenMenu}>Сохраненные фильмы</NavLink>
+					</div>
+					<Link to="/profile" className="header__profile-link" onClick={handleOpenMenu}>Аккаунт<span className="header__profile-img"></span></Link>
+				</nav>
+			</div>
+    </header>):(
+			<header className="header header_type_promo navtab">
+				<nav className="header__container">
+					<Link to="/" className="header__logo header__logo_type_promo"></Link>
+					<Link to="/signup" className="header__register">Регистрация</Link>
+					<Link to="/signin" className="header__entry">Войти</Link>
+				</nav>
     </header>
-  );
+		)
+	)
 }
-
 
 export default Header;
