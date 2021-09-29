@@ -27,3 +27,23 @@
 	opacity: 0.6;
 	cursor: pointer;
 }
+@media screen and (max-width: 768px) {
+	.movies__list {
+		padding: 70px 30px 30px;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 36px 30px;
+	}
+}
+@media screen and (max-width: 400px) {
+	.movies__list {
+		grid-template-columns: 1fr;
+	}
+	.movies__more-button {
+		width: 240px;
+	}
+}
+@media screen and (max-width: 320px) {
+	.movies__list {
+		padding: 40px 10px 30px;
+	}	
+}
