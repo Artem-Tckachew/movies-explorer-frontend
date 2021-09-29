@@ -8,6 +8,7 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Header from "../Header/Header";
+import Footer from '../Footer/Footer';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Header />
       <Switch>
         <Route exat path='/'>
-        <Main />
+          <Main />
         </Route>
         <Route path='/movies'>
           <Movies />
@@ -33,6 +34,7 @@ function App() {
           <Register />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }

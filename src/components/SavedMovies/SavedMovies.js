@@ -1,10 +1,7 @@
 import React from 'react';
-
 import './SavedMovies.css';
-
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList'
-import Footer from '../Footer/Footer';
 
 function SavedMovies() {
     const cards = [
@@ -33,7 +30,6 @@ function SavedMovies() {
         <div className="saved-movies">
             <SearchForm />
             <MoviesCardList isSaved={true} cards={cards} />
-            <Footer />
         </div>
     );
 }

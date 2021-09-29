@@ -3,7 +3,6 @@ import './Movies.css';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList'
 import Preloader from './Preloader/Preloader'
-import Footer from '../Footer/Footer'
 
 function Movies() {
 	const [isLoading, setIsLoading] = React.useState(true);
@@ -37,7 +36,6 @@ function Movies() {
 			{!isLoading?
 			(<MoviesCardList isSaved={false} cards={cards} />):
 			(<Preloader/>)}
-			<Footer/>
     </div>
   );
 }
