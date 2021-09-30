@@ -9,7 +9,7 @@ function Header(props) {
 	}
 
   return (
-		props.isAuthed?(<header className="header">
+		props.isAuth?(<header className="header">
 			<nav className="header__container">
 					<Link to="/" className="header__logo"></Link>
 					<div className="header__links">
