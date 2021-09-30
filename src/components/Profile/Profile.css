@@ -59,6 +59,7 @@
 
 .profile__input:focus-visible {
   outline: none;
+  border-bottom: 1px solid #4285F4;
 }
 
 .profile__input-title {

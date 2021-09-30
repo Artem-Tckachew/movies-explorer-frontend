@@ -69,7 +69,6 @@
   background-color: #202020;
   color: #FFFFFF;
   border-bottom: 1px solid #424242;
-  ;
   font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -79,6 +78,7 @@
 
 .register__input:focus-visible {
   outline: none;
+  border-bottom: 1px solid #4285F4;
 }
 
 .register__input_invalid {
