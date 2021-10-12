@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import './Profile.css'
+import Header from '../Header/Header';
 
 function Profile() {
   const name = 'Артём'
   const mail = '777@777.ru'
   return (
     <div className="profile">
+      <Header isAuth={true} />
       <div className="profile__container">
         <h2 className="profile__title">Привет, {name}!</h2>
         <form className="profile__form">

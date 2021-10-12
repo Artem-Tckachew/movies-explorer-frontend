@@ -1,6 +1,6 @@
 import '../../index.css';
-import React from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
+import React, { useState } from 'react';
+import { Route, Switch } from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -10,47 +10,47 @@ import Register from "../Register/Register";
 import Header from "../Header/Header";
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound'
-const loggedIn = true;
+import ProtectedRoute from '../ProtectedRoute';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   return (
     <div className="page">
       <Switch>
-        <Route exat path='/'>
+        <Route exact path="/">
           <Header isAuth={false} />
           <Main />
           <Footer />
         </Route>
-        <Route path='/movies'>
-          <Header isAuthed={true} />
-          <Movies />
-          <Footer />
-        </Route>
-        <Route path='/saved-movies'>
-          <Header isAuthed={true} />
-          <SavedMovies />
-          <Footer />
-        </Route>
-        <Route path='/profile'>
-          <Header isAuthed={true} />
-          <Profile />
-        </Route>
-        <Route path='/signin'>
-          <Login />
-        </Route>
-        <Route path='/signup'>
+        <ProtectedRoute
+          component={Movies}
+          path="/movies"
+          isLoggedIn={isLoggedIn}
+        />
+        <ProtectedRoute
+          component={SavedMovies}
+          path="/saved-movies"
+          isLoggedIn={isLoggedIn}
+        />
+        <ProtectedRoute
+          component={Profile}
+          path="/profile"
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <Route path="/signup">
           <Register />
+        </Route>
+        <Route path="/signin">
+          <Login />
         </Route>
         <Route path="*">
           <NotFound />
         </Route>
-        <Route path="/">
-          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
-        </Route>
       </Switch>
     </div>
   );
-  
+
 }
 
 export default App;
