@@ -1,12 +1,27 @@
+import React, { useEffect } from 'react';
 import './SearchForm.css'
-function SearchForm() {
+import { UseFormValidation } from '../../UseFormValidation'
+
+function SearchForm({ onSearchFilm }) {
+  const { values, handleChange, resetFrom, isValid } = UseFormValidation();
+
+  useEffect(() => {
+    resetFrom({});
+  }, [resetFrom]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSearchFilm(values);
+  }
+
   return (
     <section className="search">
       <form className="search__form">
-        <div className="search__input-box">
-          <input className="search__input" name="film" id="film" placeholder="Фильм" />
-          <button type="submit" className="search__submit"></button>
-        </div>
+        <label className="search__input-box">
+          <input type='text' className="search__input" onChange={handleChange} name="film" id="film" value={values.film || ''} placeholder="Фильм" required />
+          <button type="submit" onSubmit={handleSubmit} className="search__submit"></button>
+        </label>
+        <span className="search__error" id='film-error'>{isValid ? 'Нужно ввести ключевое слово' : ''}</span>
         <div className="filter-checkbox">
           <label className="filter-checkbox__switch">
             <input
