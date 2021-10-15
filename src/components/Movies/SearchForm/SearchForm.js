@@ -1,27 +1,43 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './SearchForm.css'
 import { UseFormValidation } from '../../UseFormValidation'
 
-function SearchForm({ onSearchFilm }) {
-  const { values, handleChange, resetFrom, isValid } = UseFormValidation();
+function SearchForm({ handleSubmit }) {
+  const { values, handleChange, errors, isValid } = UseFormValidation({
+    key: '',
+  });
+  const [searchError, setSearchError] = React.useState('');
 
-  useEffect(() => {
-    resetFrom({});
-  }, [resetFrom]);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSearchFilm(values);
+  function handleSearchSubmit(evt) {
+    evt.preventDefault();
+    if (isValid) {
+      setSearchError('');
+      handleSubmit(values.key);
+    } else if (values.key.length > 0) {
+      setSearchError(errors.key);
+    } else {
+      setSearchError('Нужно ввести ключевое слово');
+    }
   }
-
   return (
     <section className="search">
-      <form className="search__form">
+      <form className="search__form" noValidate onSubmit={handleSearchSubmit}>
         <label className="search__input-box">
-          <input type='text' className="search__input" onChange={handleChange} name="film" id="film" value={values.film || ''} placeholder="Фильм" required />
-          <button type="submit" onSubmit={handleSubmit} className="search__submit"></button>
+          <input
+            className="search__input"
+            placeholder="Фильм"
+            value={values.key}
+            onChange={handleChange}
+            name="key"
+            autoComplete="off"
+            id="key-input"
+            type="text"
+            minLength="1"
+            maxLength="60"
+            required />
+          <button type="submit" className="search__submit"></button>
         </label>
-        <span className="search__error" id='film-error'>{isValid ? 'Нужно ввести ключевое слово' : ''}</span>
+        <span className="search__error" id='film-error'>{searchError}</span>
         <div className="filter-checkbox">
           <label className="filter-checkbox__switch">
             <input

@@ -73,6 +73,17 @@
   color: #FFFFFF;
 }
 
+.profile__error {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  padding: 6px 0;
+}
+
 .profile__submit-button {
   margin-top: 220px;
   width: 100%;

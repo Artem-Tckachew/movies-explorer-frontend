@@ -5,16 +5,16 @@ export function UseFormValidation() {
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
 
-  const handleChange = (evt) => {
-    const input = evt.target;
-    const value = input.value;
-    const name = input.name;
+  const handleChange = (e) => {
+    const { target } = e;
+    const { name } = target;
+    const { value } = target;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: input.validationMessage });
-    setIsValid(input.closest("form").checkValidity());
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest('form').checkValidity());
   };
 
-  const resetFrom = useCallback(
+  const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
@@ -23,5 +23,8 @@ export function UseFormValidation() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, resetFrom, errors, isValid };
+  return { values, errors, isValid, handleChange, resetForm };
 }
+
+export default UseFormValidation;
+

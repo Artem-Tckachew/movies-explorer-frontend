@@ -1,35 +1,53 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css'
+import { UseFormValidation } from '../UseFormValidation';
+import Form from '../Form/Form';
 
-function Register() {
-  const passwordIsValid = false;
-  const emailIsValid = true;
+function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) {
+  const history = React.useHistory();
+  const { values, handleChange, errors, isValid } = UseFormValidation({
+    email: '',
+    password: '',
+    name: ''
+  });
+
+  React.useEffect(() => {
+    setError(false);
+  }, [history]);
+
+  function handleSubmit(e) {
+    setIsFormSent(true);
+    e.preventDefault();
+    const { email, password, name } = values;
+    onRegister(password, email, name);
+  }
+
   return (
     <div className="register">
       <div className="register__container">
         <Link to="/" className="register__logo"></Link>
         <h2 className="register__title">Добро пожаловать!</h2>
-        <form name="register" className="register__form">
+        <Form
+          buttonText='Зарегистрироваться'
+          message='Уже зарегистрированы?'
+          route='/signin'
+          linkText='Войти'
+          errorText="При попытке регистрации произошла ошибка."
+          handleChange={handleChange}
+          errors={errors}
+          handlerSubmit={handleSubmit}
+          values={values}
+          isFormSent={isFormSent}
+          isValid={isValid}
+          isError={isError}
+        >
           <label className="register__input-container">
             <span className="register__input-title">Имя</span>
-            <input placeholder="Имя" name="name" id="name" type="text" className={`register__input ${emailIsValid ? '' : 'register__input_invalid'}`} defaultValue="" required />
+            <input value={values.name} onChange={handleChange} name="name" id="name" type="text" className='register__input' minLength='2' defaultValue="" required />
           </label>
-          <span className="email-error register__error"></span>
-
-          <label className="register__input-container">
-            <span className="register__input-title">E-mail</span>
-            <input placeholder="E-mail" name="email" id="email" type="email" className={`register__input ${emailIsValid ? '' : 'register__input_invalid'}`} defaultValue="" required />
-          </label>
-          <span className="email-error register__error"></span>
-
-          <label className="register__input-container">
-            <span className="register__input-title">Пароль</span>
-            <input placeholder="Пароль" name="password" id="password" type="password" className={`register__input ${passwordIsValid ? '' : 'register__input_invalid'}`} defaultValue="" required />
-          </label>
-          <span className="register__error">{passwordIsValid ? '' : 'Что-то пошло не так...'}</span>
-
-          <button className="register__submit-button" type="submit">Зарегистрироваться</button>
-        </form>
+          <span className="email-error register__error" id='name-error'>{errors.name || ''}</span>
+        </Form>
         <div className="register__bottom-container">
           <span className="register__bottom">Уже зарегистрированы?</span>
           <Link to="/signin" className="register__sign-button" type="button">Войти</Link>
