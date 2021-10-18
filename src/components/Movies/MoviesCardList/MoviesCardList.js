@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import './MoviesCardList.css';
 import { debounce } from 'lodash';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { desktopWidth, tabletWidth, mobileWidth } from '../../../utils/constans';
