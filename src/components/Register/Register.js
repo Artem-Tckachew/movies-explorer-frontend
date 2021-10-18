@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Register.css'
 import { UseFormValidation } from '../UseFormValidation';
 import Form from '../Form/Form';
 
 function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) {
-  const history = React.useHistory();
+  const history = useHistory();
   const { values, handleChange, errors, isValid } = UseFormValidation({
     email: '',
     password: '',
