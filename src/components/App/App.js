@@ -19,7 +19,7 @@ import searchMovies from '../../utils/searchMovies';
 import { shortDuration } from '../../utils/constans';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const history = useHistory();
   const { pathname } = useLocation();
