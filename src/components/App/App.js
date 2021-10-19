@@ -308,7 +308,7 @@ function App() {
             setIsFormSent={setIsFormSent}
             setSuccess={setIsUpdateSuccessful}
           />
-          <Route path='/signup' exact>
+          <Route exact path='/signup'>
           <Header isAuth={true}/>
             {!isLoggedIn ? (
               <Register
