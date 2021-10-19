@@ -1,6 +1,5 @@
 .movies{
     background: #202020;
-    height: 100vh;
 }
 .movies__found-error{
   font-family: Inter, sans-serif;

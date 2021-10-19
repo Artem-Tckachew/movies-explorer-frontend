@@ -309,7 +309,7 @@ function App() {
             setSuccess={setIsUpdateSuccessful}
           />
           <Route path='/signup' exact>
-          <Header />
+          <Header isAuth={true}/>
             {!isLoggedIn ? (
               <Register
                 onRegister={onRegister}
@@ -323,7 +323,7 @@ function App() {
             )}
           </Route>
           <Route exact path='/signin'>
-          <Header />
+          <Header isAuth={true}/>
             {!isLoggedIn ? (
               <Login
                 onLogin={onLogin}
