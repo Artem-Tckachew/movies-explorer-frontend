@@ -13,16 +13,16 @@ function Movies(props) {
       <Header isAuth={true} />
       <SearchForm handleSubmit={props.handleSubmit} />
       {props.isLoading ? <Preloader /> : null}
-        {props.isNotFound ? (
-          <p className="movies__found-error">Ничего не найдено</p>
-        ) : null}
-        {props.isError ? (
-          <p className="movies__error">
-            Во время запроса произошла ошибка. Возможно, проблема с соединением
-            или сервер недоступен. Подождите немного и попробуйте ещё раз
-          </p>
-        ) : null}
-        <MoviesCardList isSaved={false} {...props} />
+      {props.isNotFound ? (
+        <p className="movies__found-error">Ничего не найдено</p>
+      ) : null}
+      {props.isError ? (
+        <p className="movies__error">
+          Во время запроса произошла ошибка. Возможно, проблема с соединением
+          или сервер недоступен. Подождите немного и попробуйте ещё раз
+        </p>
+      ) : null}
+      <MoviesCardList isSaved={false} {...props} />
       <Footer />
     </div>
   );

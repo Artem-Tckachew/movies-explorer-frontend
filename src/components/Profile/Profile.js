@@ -5,7 +5,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import UseFormValidation from '../UseFormValidation';
 import Header from '../Header/Header'
 
-function Profile({ handleSignOut, handleUpdateUser, isSuccess, isError, setSuccess, setError }) {
+function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
   const { email, name } = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid } = UseFormValidation({
     name,

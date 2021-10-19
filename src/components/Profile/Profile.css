@@ -11,30 +11,6 @@
   max-width: calc((260 / 320) * 100%);
 }
 
-.profile-success {
-  font-family: Inter, sans-serif;
-  color: #FFFFFF;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  padding: 0 0 123px;
-  margin: 0;
-}
-
-.profile-error {
-  font-family: Inter, sans-serif;
-  color: #FFFFFF;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  padding: 0 0 123px;
-  margin: 0;
-}
-
 .profile__form {
   width: 410px;
   display: flex;

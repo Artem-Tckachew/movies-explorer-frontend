@@ -36,12 +36,12 @@ const MoviesCardList = ({
   useEffect(() => {
     const newMovies = movies.slice(0, moviesCount().count);
     setFilteredMovies(newMovies);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movies, windowSize]);
 
   useEffect(() => {
     window.addEventListener('resize', onChange);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onMoreButtonClick = () => {
@@ -65,10 +65,10 @@ const MoviesCardList = ({
                   handleSaveMovie={handleSaveMovie}
                   savedMoviesId={savedMoviesId}
                   deleteMovie={deleteMovie} />
-                  );
-                }
-                return filmsBatch;
-              }, [])}
+              );
+            }
+            return filmsBatch;
+          }, [])}
       </ul>
       {movies.length > filteredMovies.length ? (
         <button
@@ -76,7 +76,7 @@ const MoviesCardList = ({
           type="button"
           aria-label="Ещё"
           className="movies__more-button">Ещё</button>
-          ) : null}
+      ) : null}
     </section>
   );
 }

@@ -4,23 +4,23 @@ import './Login.css'
 import { UseFormValidation } from '../UseFormValidation';
 import Form from '../Form/Form';
 
-  function Login({ onLogin, setError, setIsFormSent, isFormSent }) {
-    const history = useHistory();
-    const { values, handleChange, errors, isValid } = UseFormValidation({
-      email: '',
-      password: '',
-    });
+function Login({ onLogin, setError, setIsFormSent, isFormSent }) {
+  const history = useHistory();
+  const { values, handleChange, errors, isValid } = UseFormValidation({
+    email: '',
+    password: '',
+  });
 
-    useEffect(() => {
-      setError(false);
-    }, [history]);
+  useEffect(() => {
+    setError(false);
+  }, [history]);
 
-    const handleSubmit = (evt) => {
-      evt.preventDefault();
-      setIsFormSent(true);
-      const { email, password } = values;
-      onLogin(password, email);
-    };
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    setIsFormSent(true);
+    const { email, password } = values;
+    onLogin(password, email);
+  };
 
   return (
     <div className="login">
