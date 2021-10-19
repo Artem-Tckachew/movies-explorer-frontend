@@ -11,7 +11,7 @@ function Movies(props) {
   return (
     <div className="movies">
       <Header isAuth={true} />
-      <SearchForm handleSubmit={props.handleSubmit} />
+      <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} />
       {props.isLoading ? <Preloader /> : null}
       {props.isNotFound ? (
         <p className="movies__found-error">Ничего не найдено</p>

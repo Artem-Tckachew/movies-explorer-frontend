@@ -9,7 +9,7 @@ function SavedMovies(props) {
   return (
     <div className="saved-movies">
       <Header isAuth={true} />
-      <SearchForm handleSubmit={props.handleSubmit} />
+      <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} />
       {props.movies === 'NotFound' ? (
         <p className="movies__found-error">Ничего не найдено</p>
       ) : null}
