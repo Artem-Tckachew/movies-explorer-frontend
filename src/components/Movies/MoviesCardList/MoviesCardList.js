@@ -61,7 +61,7 @@ const MoviesCardList = ({
                 <MoviesCard
                   movie={movie}
                   isSaved={isSaved}
-                  key={isSaved ? movie._id : movie.id}
+                  key={isSaved ? movie.id : movie._id}
                   handleSaveMovie={handleSaveMovie}
                   savedMoviesId={savedMoviesId}
                   deleteMovie={deleteMovie} />
