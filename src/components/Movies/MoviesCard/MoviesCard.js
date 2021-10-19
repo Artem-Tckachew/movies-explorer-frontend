@@ -33,7 +33,7 @@ function MoviesCard({ movie, savedMoviesId, isSaved, deleteMovie, handleSaveMovi
           <h2 className="card__title">{movie.nameRU}</h2>
           <p className="card__duration">{time}</p>
         </div>
-        <button onClick={handleSave} className={`card__save ${isSaved ? 'card__save_active' : ''} ${!isSaved ? '' : 'card__save_hidden'}`} aria-label="Нравится" type="button"></button>
+        <button onClick={handleSave} className={`card__save ${isLiked || isSaved ? 'card__save_active' : ''} ${!isSaved ? '' : 'card__save_hidden'}`} aria-label="Нравится" type="button"></button>
         <button className={`card__delete-button ${isSaved ? '' : 'card__delete-button_hidden'}`} aria-label="Удалить" type="button"></button>
       </div>
       <a
