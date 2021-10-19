@@ -2,7 +2,8 @@ import React from 'react';
 import './SearchForm.css'
 import { UseFormValidation } from '../../UseFormValidation'
 
-function SearchForm({ handleSubmit }) {
+function SearchForm({ handleSubmit, handleChangeRadio }) {
+  const checked = React.useRef();
   const { values, handleChange, errors, isValid } = UseFormValidation({
     key: '',
   });
@@ -18,6 +19,10 @@ function SearchForm({ handleSubmit }) {
     } else {
       setSearchError('Нужно ввести ключевое слово');
     }
+  }
+
+  function change() {
+    handleChangeRadio(checked.current.checked);
   }
   return (
     <section className="search">
@@ -43,6 +48,10 @@ function SearchForm({ handleSubmit }) {
             <input
               className="filter-checkbox__checkbox"
               type="checkbox"
+              ref={checked}
+              id="shortfilm"
+              defaultChecked={false}
+              onChange={change}
             />
             <span className="filter-checkbox__round"></span>
           </label>
