@@ -24,15 +24,14 @@ function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
     setSuccess('');
     setError('');
     // eslint-disable-next-line no-shadow
-    const { email, name } = values;
-    handleUpdateUser({ email, name });
+    handleUpdateUser(email, name);
   };
 
   return (
     <div className="profile">
       <Header isAuth={true} />
       <div className="profile__container">
-        <h2 className="profile__title">Привет, {name}!</h2>
+        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
         <form className="profile__form" onSubmit={onEditSubmit}>
           <label className="profile__input-container">
             <span className="profile__input-title">Имя</span>
