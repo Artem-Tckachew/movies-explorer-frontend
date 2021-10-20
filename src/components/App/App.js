@@ -95,7 +95,7 @@ function App() {
 
   useEffect(() => {
     setIsUpdateSuccessful(false);
-  }, [pathname]);
+  }, [path]);
 
   const handleSearchSavedMovies = (searchValue) => {
     setIsOnlyCheckedSearch(false);
