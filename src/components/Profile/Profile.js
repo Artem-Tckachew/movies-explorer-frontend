@@ -6,19 +6,19 @@ import UseFormValidation from '../UseFormValidation';
 import Header from '../Header/Header'
 
 function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
-  const { email, name } = useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid } = UseFormValidation({
-    name,
-    email,
-  });
+  const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid } = UseFormValidation();
+  const email = values.email;
+  const name = values.name;
 
-  const [hasChanges, setHasChanges] = useState(false);
+  function onChange(e) {
+    handleChange(e);
+    setRequestError('');
+    if(name === currentUser.name && email === currentUser.email) {
+      setIsValid(0)
+    }
+  }
 
-  useEffect(() => {
-    setHasChanges(
-      !(values.name === name) || (!(values.email === email) && isValid)
-    );
-  }, [values.name, values.email, name, email]);
 
   const onEditSubmit = (evt) => {
     evt.preventDefault();
@@ -37,12 +37,12 @@ function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
         <form className="profile__form" onSubmit={onEditSubmit}>
           <label className="profile__input-container">
             <span className="profile__input-title">Имя</span>
-            <input placeholder="Имя" className="profile__input" id="name" name="name" onChange={handleChange} value={name} required autoComplete="off" minLength="2" maxLength="40" />
+            <input placeholder="Имя" className="profile__input" id="name" name="name" onChange={onChange} value={currentUser.name} required autoComplete="off" minLength="2" maxLength="40" />
           </label>
           <span className="profile__error" id='name-error'>{errors.name || ''}</span>
           <label className="profile__input-container">
             <span className="profile__input-title">E-mail</span>
-            <input placeholder="E-mail" name="email" id="email" type="email" className="profile__input" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" onChange={handleChange} value={email} required minLength="2" maxLength="40" />
+            <input placeholder="E-mail" name="email" id="email" type="email" className="profile__input" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" onChange={onChange} value={currentUser.email} required minLength="2" maxLength="40" />
           </label>
           <span className="profile__error" id='email-error'>{errors.email || ''}</span>
           <button className="profile__submit-button" disabled={!hasChanges && !isValid} type="submit">Редактировать</button>
