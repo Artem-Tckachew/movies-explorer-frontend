@@ -22,7 +22,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const history = useHistory();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const path = location.pathname;
   const [isOnlyCheckedSearch, setIsOnlyCheckedSearch] = useState(false);
   const [foundSavedMovies, setFoundSavedMovies] = useState([]);
   const [savedMoviesId, setSavedMoviesId] = useState([]);
@@ -272,7 +273,6 @@ function App() {
           </Route>
           <ProtectedRoute
             component={Movies}
-            exact
             path="/movies"
             isLoggedIn={isLoggedIn}
             movies={movies}
@@ -289,7 +289,6 @@ function App() {
             component={SavedMovies}
             path="/saved-movies"
             isLoggedIn={isLoggedIn}
-            exact
             movies={
               // eslint-disable-next-line no-nested-ternary
               savedKeyWord || isOnlyCheckedSearch
@@ -303,7 +302,6 @@ function App() {
             handleChangeRadio={setIsShortSavedFilmChecked}
           />
           <ProtectedRoute
-            exact
             component={Profile}
             path="/profile"
             isLoggedIn={isLoggedIn}
@@ -316,7 +314,7 @@ function App() {
             setIsFormSent={setIsFormSent}
             setSuccess={setIsUpdateSuccessful}
           />
-          <Route exact path='/signup'>
+          <Route path='/signup'>
             {!isLoggedIn ? (
               <Register
                 onRegister={onRegister}
@@ -329,7 +327,7 @@ function App() {
               <Redirect to='/movies' />
             )}
           </Route>
-          <Route exact path='/signin'>
+          <Route path='/signin'>
             {!isLoggedIn ? (
               <Login
                 onLogin={onLogin}
