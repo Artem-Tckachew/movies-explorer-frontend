@@ -1,5 +1,5 @@
 import './Profile.css'
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import UseFormValidation from '../UseFormValidation';
@@ -14,7 +14,7 @@ function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
   function onChange(e) {
     handleChange(e);
     setRequestError('');
-    if(name === currentUser.name && email === currentUser.email) {
+    if (name === currentUser.name && email === currentUser.email) {
       setIsValid(0)
     }
   }
