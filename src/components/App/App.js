@@ -75,6 +75,14 @@ function App() {
           setCurrentUser(userData);
           setSavedMovies(moviesData);
           setSavedMoviesId(moviesData.map((movie) => movie.movieId));
+          setIsLoggedIn(true);
+          if (path === "/profile") {
+            history.push('/profile')
+          } else if (path === "/movies") {
+            history.push('/movies')
+          } else if (path === "/saved-movies") {
+            history.push('saved-movies')
+          }
         })
         .catch((e) => console.log(e));
     }
