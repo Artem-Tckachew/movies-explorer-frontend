@@ -270,8 +270,8 @@ function App() {
         <Switch>
           <Route exact path="/">
           {!isLoggedIn ? (
-            <Header  isAuth={false} />) : (
-              <Header  isAuth={true} />
+            <Header  isAuth={true} />) : (
+              <Header  isAuth={false} />
             )}
             <Main />
             <Footer />
