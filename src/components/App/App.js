@@ -269,7 +269,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path="/">
-            <Header isAuth={false} />
+            <Header isLoggedIn={isLoggedIn} isAuth={false} />
             <Main />
             <Footer />
           </Route>
