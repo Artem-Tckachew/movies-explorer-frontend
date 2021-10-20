@@ -168,11 +168,13 @@ function App() {
         onLogin(password, email);
       })
       .catch((err) => {
-        console.log(err);
-        setIsRegisterError(err);
-      })
-      .finally(() => {
-        setIsFormSent(false);
+        if (err === 409 || err === 401 || err === 400) {
+          setIsRegisterError('Пользователь с таким email уже зарегестрирован');
+        } else {
+          setIsRegisterError(err)
+          console.log(err)
+          setIsFormSent(false);
+        };
       });
   };
 
@@ -251,7 +253,7 @@ function App() {
       .authorize(password, email)
       .then(() => {
         setIsLoggedIn(true);
-        history.push('/');
+        history.push('/movies');
       })
       .catch((err) => {
         console.log(err);
@@ -315,22 +317,22 @@ function App() {
             setSuccess={setIsUpdateSuccessful}
           />
           <Route path='/signup'>
-              <Register
-                onRegister={onRegister}
-                isError={isRegisterError}
-                setError={setIsRegisterError}
-                isFormSent={isFormSent}
-                setIsFormSent={setIsFormSent}
-              />
+            <Register
+              onRegister={onRegister}
+              isError={isRegisterError}
+              setError={setIsRegisterError}
+              isFormSent={isFormSent}
+              setIsFormSent={setIsFormSent}
+            />
           </Route>
           <Route path='/signin'>
-              <Login
-                onLogin={onLogin}
-                isError={isLoginError}
-                setError={setIsLoginError}
-                isFormSent={isFormSent}
-                setIsFormSent={setIsFormSent}
-              />
+            <Login
+              onLogin={onLogin}
+              isError={isLoginError}
+              setError={setIsLoginError}
+              isFormSent={isFormSent}
+              setIsFormSent={setIsFormSent}
+            />
           </Route>
           <Route path="*">
             <NotFound />
