@@ -7,13 +7,12 @@ import Header from '../Header/Header'
 
 function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid } = UseFormValidation();
+  const { values, handleChange, errors, isValid, setIsValid } = UseFormValidation();
   const email = values.email;
   const name = values.name;
 
   function onChange(e) {
     handleChange(e);
-    setRequestError('');
     if (name === currentUser.name && email === currentUser.email) {
       setIsValid(0)
     }
@@ -45,7 +44,7 @@ function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
             <input placeholder="E-mail" name="email" id="email" type="email" className="profile__input" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" onChange={onChange} value={currentUser.email} required minLength="2" maxLength="40" />
           </label>
           <span className="profile__error" id='email-error'>{errors.email || ''}</span>
-          <button className="profile__submit-button" disabled={!hasChanges && !isValid} type="submit">Редактировать</button>
+          <button className="profile__submit-button" disabled={!isValid} type="submit">Редактировать</button>
         </form>
         <Link to="/" className="profile__exit-button" onClick={handleSignOut} type="button">Выйти из аккаунта</Link>
       </div>
