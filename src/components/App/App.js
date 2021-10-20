@@ -315,7 +315,6 @@ function App() {
             setSuccess={setIsUpdateSuccessful}
           />
           <Route path='/signup'>
-            {!isLoggedIn ? (
               <Register
                 onRegister={onRegister}
                 isError={isRegisterError}
@@ -323,12 +322,8 @@ function App() {
                 isFormSent={isFormSent}
                 setIsFormSent={setIsFormSent}
               />
-            ) : (
-              <Redirect to='/movies' />
-            )}
           </Route>
           <Route path='/signin'>
-            {!isLoggedIn ? (
               <Login
                 onLogin={onLogin}
                 isError={isLoginError}
@@ -336,9 +331,6 @@ function App() {
                 isFormSent={isFormSent}
                 setIsFormSent={setIsFormSent}
               />
-            ) : (
-              <Redirect to='/movies' />
-            )}
           </Route>
           <Route path="*">
             <NotFound />
