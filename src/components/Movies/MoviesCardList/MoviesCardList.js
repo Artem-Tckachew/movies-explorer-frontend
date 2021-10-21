@@ -13,6 +13,8 @@ const MoviesCardList = ({
 }) => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [filteredFilms, setFilteredFilms] = useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
 
   // eslint-disable-next-line consistent-return
   function moviesCount() {
@@ -44,11 +46,25 @@ const MoviesCardList = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onMoreButtonClick = () => {
-    setFilteredMovies(
-      movies.slice(0, (filteredMovies.length += moviesCount().more))
-    );
-  };
+  useEffect(() => {
+    if(window.innerWidth >= 1280){
+      setFilteredFilms(filteredFilms.splice(0, 12));
+    } else if(window.innerWidth >= 768) {
+      setFilteredSavedMovies(filteredSavedMovies.splice(0, 8));
+      setFilteredFilms(filteredFilms.splice(0, 8));
+    } else {
+      setFilteredFilms(filteredFilms.splice(0, 5));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function onMoreButtonClick() {
+    if (window.innerWidth >= 1280) {
+      setFilteredFilms(JSON.parse(localStorage.getItem('searchedFilms')).splice(0, filteredFilms.length + 4));
+    } else {
+      setFilteredFilms(JSON.parse(localStorage.getItem('searchedFilms')).splice(0, filteredFilms.length + 3));
+    };
+  }
 
   return (
     <section className="movies-card-list">
