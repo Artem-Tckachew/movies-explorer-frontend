@@ -31,7 +31,7 @@ function Profile({ handleSignOut, handleUpdateUser, setSuccess, setError }) {
 
   return (
     <div className="profile">
-      <Header isAuth={true} />
+      <Header isLoggedIn="true"/>
       <div className="profile__container">
         <h2 className="profile__title">Привет, {name}!</h2>
         <form className="profile__form" onSubmit={onEditSubmit}>

@@ -1,6 +1,7 @@
 import '../../index.css';
+import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -269,9 +270,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path="/">
-            {isLoggedIn ?
-              (<Header isAuth={false} />) : (<Header isAuth={true} />)
-            }
+            <Header isLoggedIn={isLoggedIn} />
             <Main />
             <Footer />
           </Route>

@@ -7,15 +7,17 @@ import Footer from '../Footer/Footer';
 
 function SavedMovies(props) {
   return (
-    <div className="saved-movies">
-      <Header isAuth={true} />
-      <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} />
-      {props.movies === 'NotFound' ? (
-        <p className="movies__found-error">Ничего не найдено</p>
-      ) : null}
-      <MoviesCardList {...props} isSaved />
+    <>
+      <Header isLoggedIn="true" />
+      <div className="saved-movies">
+        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} />
+        {props.movies === 'NotFound' ? (
+          <p className="movies__found-error">Ничего не найдено</p>
+        ) : null}
+        <MoviesCardList {...props} isSaved />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

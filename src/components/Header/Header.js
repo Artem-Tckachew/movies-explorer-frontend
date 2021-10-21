@@ -2,14 +2,14 @@ import './Header.css';
 import { NavLink, Link } from "react-router-dom";
 import React from 'react';
 
-function Header(props) {
+function Header({isLoggedIn}) {
   const [popupOpened, setPopupOpened] = React.useState(false)
   function handleOpenMenu() {
     setPopupOpened(!popupOpened)
   }
 
   return (
-    props.isAuth ? (<header className="header">
+    isLoggedIn ? (<header className="header">
       <nav className="header__container">
         <Link to="/" className="header__logo"></Link>
         <div className="header__links">
