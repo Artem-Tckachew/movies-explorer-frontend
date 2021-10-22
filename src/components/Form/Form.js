@@ -23,8 +23,6 @@ function Form({
           className='form__input'
           minLength='2'
           onChange={handleChange}
-          type='email'
-          value={values.email}
           autoFocus
         />
       </label>
@@ -41,7 +39,6 @@ function Form({
           type='password'
           onChange={handleChange}
           name='password'
-          value={values.password}
           autoComplete='off'
         />
       </label>

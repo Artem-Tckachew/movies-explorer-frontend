@@ -14,7 +14,7 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
 
   React.useEffect(() => {
     setError(false);
-  }, [history]);
+  }, [history, setError]);
 
   function handleSubmit(e) {
     setIsFormSent(true);
@@ -44,7 +44,7 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
         >
           <label className="register__input-container">
             <span className="register__input-title">Имя</span>
-            <input value={values.name} onChange={handleChange} name="name" id="name" type="text" className='register__input' minLength='2' defaultValue="" required />
+            <input onChange={handleChange} name="name" id="name" type="text" className='register__input' minLength='2' defaultValue="" required />
           </label>
           <span className="email-error register__error" id='name-error'>{errors.name || ''}</span>
         </Form>

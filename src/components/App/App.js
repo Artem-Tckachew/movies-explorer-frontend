@@ -40,6 +40,7 @@ function App() {
   const [isSearchError, setIsSearchError] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isContentReady, setIsContentReady] = useState(true);
   const [movies, setMovies] = useState(
     localStorage.getItem('foundMovies')
       ? JSON.parse(localStorage.getItem('foundMovies'))
@@ -88,7 +89,7 @@ function App() {
         })
         .catch((e) => console.log(e));
     }
-  }, [isLoggedIn]);
+  }, [history, isLoggedIn, path]);
 
   useEffect(() => {
     setIsNotFound(false);
@@ -187,13 +188,13 @@ function App() {
         setIsUpdateSuccessful(true);
       })
       .catch((err) => {
-        console.log(err);
-        setIsProfileUpdateError(err);
+        if (err === 409) {
+          setIsProfileUpdateError("Пользователь с таким email уже есть")
+        } else {
+          setIsProfileUpdateError("Сервер отдыхает, перезагрузите страницу")
+        }
       })
-      .finally(() => {
-        setIsFormSent(false);
-      });
-  };
+  }
 
   const handleSearchMovies = async (searchValue) => {
     setIsSearchError(false);
@@ -286,7 +287,10 @@ function App() {
             isNotFound={isNotFound}
             handleSaveMovie={handleSaveMovie}
             deleteMovie={deleteMovie}
+            setIsContentReady={setIsContentReady}
+            isContentReady={isContentReady}
             handleChangeRadio={setIsShortFilmChecked}
+
           />
           <ProtectedRoute
             component={SavedMovies}

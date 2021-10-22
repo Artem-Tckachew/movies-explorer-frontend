@@ -31,7 +31,6 @@ function SearchForm({ handleSubmit, handleChangeRadio }) {
           <input
             className="search__input"
             placeholder="Фильм"
-            value={values.key}
             onChange={handleChange}
             name="key"
             autoComplete="off"

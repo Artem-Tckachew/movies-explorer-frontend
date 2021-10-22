@@ -12,7 +12,7 @@ function Movies(props) {
     <>
       <Header isLoggedIn="true" />
       <div className="movies">
-        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} />
+        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} setIsContentReady={props.setIsContentReady} />
         {props.isLoading ? <Preloader /> : null}
         {props.isNotFound ? (
           <p className="movies__found-error">Ничего не найдено</p>
@@ -23,7 +23,8 @@ function Movies(props) {
             или сервер недоступен. Подождите немного и попробуйте ещё раз
           </p>
         ) : null}
-        <MoviesCardList isSaved={false} {...props} />
+        { props.isContentReady?
+        <MoviesCardList isSaved={false} {...props} /> : <Preloader />}
       </div>
       <Footer />
     </>
