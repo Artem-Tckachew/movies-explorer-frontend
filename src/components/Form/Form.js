@@ -47,11 +47,10 @@ function Form({
       </label>
         <span className="form__error">{errors.password}</span>
         {isError ? (
-        <span className='form__error'>
-          {isError.message ? isError.message : errorText}
+        <span className='form__error'>{errorText}
         </span>
       ) : null}
-      <button onClick={handlerSubmit} className={`form__submit-button  ${isValid && !isFormSent
+      <button onClick={handlerSubmit} disabled={!isValid} className={`form__submit-button  ${isValid && !isFormSent
           ? ''
           : 'form__submit-button_disabled'}`} type={isValid && !isFormSent
             ? 'submit'

@@ -157,9 +157,10 @@ function App() {
       localStorage.removeItem('foundMovies');
       localStorage.removeItem('movies');
       setMovies([]);
-      setIsLoggedIn(false);
       setCurrentUser({ email: '', name: '' });
       history.push('/');
+      setIsLoggedIn(false);
+
     });
   };
 
