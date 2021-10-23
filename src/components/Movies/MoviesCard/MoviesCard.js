@@ -9,6 +9,7 @@ function MoviesCard({ movie, savedMoviesId, isSaved, deleteMovie, handleSaveMovi
     }
   };
 
+
   const isLiked = handleIsLike(movie, savedMoviesId);
   const hours = Math.trunc(movie.duration / HourDuration);
   const minutes = movie.duration % HourDuration;
@@ -52,6 +53,7 @@ function MoviesCard({ movie, savedMoviesId, isSaved, deleteMovie, handleSaveMovi
         />
       </a>
     </li>
+
   )
 }
 

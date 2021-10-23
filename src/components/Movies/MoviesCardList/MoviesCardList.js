@@ -9,7 +9,7 @@ const MoviesCardList = ({
   isSaved,
   handleSaveMovie,
   savedMoviesId,
-  deleteMovie,
+  deleteMovie
 }) => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -80,7 +80,8 @@ const MoviesCardList = ({
                   key={isSaved ? movie.id : movie._id}
                   handleSaveMovie={handleSaveMovie}
                   savedMoviesId={savedMoviesId}
-                  deleteMovie={deleteMovie} />
+                  deleteMovie={deleteMovie}
+                  />
               );
             }
             return filmsBatch;

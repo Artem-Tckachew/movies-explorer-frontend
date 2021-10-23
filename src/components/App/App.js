@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound'
 import ProtectedRoute from '../ProtectedRoute';
 import CurrentUserContext from '../../contexts/CurrentUserContext'
-import mainApi from '../../utils/MainApi';
+import * as mainApi from '../../utils/MainApi';
 import getMovies from '../../utils/MoviesApi';
 import searchMovies from '../../utils/searchMovies';
 import { shortDuration } from '../../utils/constans';
@@ -67,7 +67,7 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push('/');
+      history.push('/movies');
     }
   }, [isLoggedIn, history]);
 
@@ -163,11 +163,11 @@ function App() {
     });
   };
 
-  const onRegister = (password, email, name) => {
-    auth
-      .register(password, email, name)
+  const onRegister = (data) => {
+    const { email, name, password } = data;
+    auth.register(password, email, name)
       .then(() => {
-        onLogin(password, email);
+        onLogin({password, email});
       })
       .catch((err) => {
         if (err === 409 || err === 401 || err === 400) {
@@ -179,22 +179,6 @@ function App() {
         };
       });
   };
-
-  const handleUpdateUser = (userInfo) => {
-    mainApi
-      .patchProfileInfo(userInfo)
-      .then((data) => {
-        setCurrentUser(data);
-        setIsUpdateSuccessful(true);
-      })
-      .catch((err) => {
-        if (err === 409) {
-          setIsProfileUpdateError("Пользователь с таким email уже есть")
-        } else {
-          setIsProfileUpdateError("Сервер отдыхает, перезагрузите страницу")
-        }
-      })
-  }
 
   const handleSearchMovies = async (searchValue) => {
     setIsSearchError(false);
@@ -250,21 +234,22 @@ function App() {
       });
   };
 
-  const onLogin = (password, email) => {
-    auth
-      .authorize(password, email)
+  const onLogin = (data) => {
+    const { email, password } = data;
+    auth.authorize(password, email)
       .then(() => {
         setIsLoggedIn(true);
         history.push('/movies');
       })
       .catch((err) => {
+        if (err === 401 || err === 400) {
         console.log(err);
-        setIsLoginError(err);
-      })
-      .finally(() => {
-        setIsFormSent(false);
-      });
-  };
+        setIsLoginError('Неверный логин или пароль');
+      } else {
+        setIsLoginError('Сервер отдыхает')
+      }
+    })
+  }
 
   return (
     <div className="page">
@@ -313,7 +298,7 @@ function App() {
             path="/profile"
             isLoggedIn={isLoggedIn}
             handleSignOut={handleSignOut}
-            handleUpdateUser={handleUpdateUser}
+            setCurrentUser={setCurrentUser}
             isError={isProfileUpdateError}
             setError={setIsProfileUpdateError}
             isSuccess={isUpdateSuccessful}

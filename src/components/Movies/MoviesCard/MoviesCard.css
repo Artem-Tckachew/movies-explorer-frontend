@@ -99,3 +99,14 @@
   color: #8B8B8B;
   ;
 }
+
+.card__error {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  padding: 6px 0;
+}

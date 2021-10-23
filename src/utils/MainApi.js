@@ -1,89 +1,88 @@
-export const BASE_URL = 'https://artemtkachev.api.nomoredomains.monster';
+export const BASE__URL = 'https://artemtkachev.api.nomoredomains.monster';
 
-class Api {
-  constructor(options) {
-    this._options = options;
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
-  }
-
-  _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  }
-
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: 'GET',
-      credentials: 'include',
-    }).then(this._checkResponse);
-  }
-
-  getMovies() {
-    return fetch(`${this._baseUrl}/movies`, {
-      method: 'GET',
-      credentials: 'include',
-    }).then(this._checkResponse);
-  }
-
-  patchProfileInfo(inputsValue) {
-    const newOptions = {
-      ...this._options,
-      body: JSON.stringify(inputsValue),
-      method: 'PATCH',
-      headers: this._headers,
-      credentials: 'include',
-    };
-    return fetch(`${this._baseUrl}/users/me`, newOptions).then(
-      this._checkResponse
-    );
-  }
-
-  saveMovie(movie) {
-    const newOptions = {
-      headers: this._headers,
-      credentials: 'include',
-      method: 'POST',
-      body: JSON.stringify({
-        country: movie.country || 'null',
-        director: movie.director || 'null',
-        duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
-        trailer: movie.trailerLink
-          ? movie.trailerLink.startsWith('https')
-            ? movie.trailerLink
-            : 'https://www.youtube.com'
-          : 'https://www.youtube.com',
-        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-        movieId: movie.id.toString(),
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN || 'null',
-      }),
-    };
-    return fetch(`${this._baseUrl}/movies`, newOptions).then(
-      this._checkResponse
-    );
-  }
-
-  removeMovie(movieId) {
-    const newOptions = {
-      headers: this._headers,
-      credentials: 'include',
-      method: 'DELETE',
-    };
-    return fetch(`${this._baseUrl}/movies/${movieId}`, newOptions).then(
-      this._checkResponse
-    );
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(res.status);
   }
 }
 
-export default new Api({
-  baseUrl: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+export const getUserInfo = () => {
+  return fetch(`${BASE__URL}/users/me`,
+    {
+      method: "GET",
+      credentials: 'include',
+    })
+    .then(res => checkResponse(res))
+}
+
+export const getMovies = () => {
+  return fetch(`${BASE__URL}/movies`, {
+    credentials: 'include',
+    headers: {
+      "Content-Type": "application/json"
+    },
+  })
+    .then(res => checkResponse(res))
+}
+
+export const patchProfileInfo = (name, email) => {
+  return fetch(`${BASE__URL}/users/me`, {
+    method: "PATCH",
+    credentials: 'include',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name, email })
+  })
+    .then(res => checkResponse(res))
+}
+
+export const saveMovie = (
+  country,
+  director,
+  duration,
+  year,
+  description,
+  image,
+  trailer,
+  nameRU,
+  nameEN,
+  thumbnail,
+  movieId
+) => {
+  return fetch(`${BASE__URL}/movies`, {
+    method: "POST",
+    credentials: 'include',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image,
+      trailer,
+      nameRU,
+      nameEN,
+      thumbnail,
+      movieId
+    })
+  })
+    .then(res => checkResponse(res))
+}
+
+export const removeMovie = (id) => {
+  return fetch(`${BASE__URL}/movies/${id}`, {
+    method: "DELETE",
+    credentials: 'include',
+    headers: {
+      "Content-Type": "application/json"
+    },
+  }
+  )
+    .then(res => checkResponse(res))
+}

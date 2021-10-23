@@ -5,13 +5,20 @@ export function UseFormValidation() {
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
 
-  const handleChange = (e) => {
-    const { target } = e;
-    const { name } = target;
-    const { value } = target;
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest('form').checkValidity());
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({...values, [name]: value});
+    if (target.name === "email" && target.validationMessage){
+      setErrors({...errors, [name]: "не похоже на почту" });
+    } else if(target.name === "password" && target.validationMessage){
+      setErrors({...errors, [name]: "пароль должен содержать минимум 8 символов" });
+    }
+    else {
+      setErrors({...errors, [name]: target.validationMessage });
+    }
+    setIsValid(target.closest("form").checkValidity());
   };
 
   const resetForm = useCallback(
@@ -23,8 +30,7 @@ export function UseFormValidation() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, errors, isValid, handleChange, resetForm, setIsValid };
+  return { values, handleChange, errors, isValid, resetForm, setIsValid };
 }
 
 export default UseFormValidation;
-

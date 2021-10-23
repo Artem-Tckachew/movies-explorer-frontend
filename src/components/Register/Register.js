@@ -6,21 +6,19 @@ import Form from '../Form/Form';
 
 function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) {
   const history = useHistory();
-  const { values, handleChange, errors, isValid } = UseFormValidation({
-    email: '',
-    password: '',
-    name: ''
-  });
+  const { values, handleChange, errors, isValid } = UseFormValidation();
+  const email = values.email;
+  const name = values.name;
+  const password = values.password;
 
   React.useEffect(() => {
     setError(false);
-  }, [history, setError]);
+  }, [history]);
 
-  function handleSubmit(e) {
+  const handleSubmit = (evt) => {
     setIsFormSent(true);
-    e.preventDefault();
-    const { email, password, name } = values;
-    onRegister(password, email, name);
+    evt.preventDefault();
+    onRegister({ name, email, password });
   }
 
   return (
@@ -33,7 +31,7 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
           message='Уже зарегистрированы?'
           route='/signin'
           linkText='Войти'
-          errorText="При попытке регистрации произошла ошибка."
+          errorText="Пользователь с таким email уже зарегестрирован"
           handleChange={handleChange}
           errors={errors}
           handlerSubmit={handleSubmit}

@@ -4,12 +4,11 @@ import './Login.css'
 import { UseFormValidation } from '../UseFormValidation';
 import Form from '../Form/Form';
 
-function Login({ onLogin, setError, setIsFormSent, isFormSent }) {
+function Login({ onLogin, setError, setIsFormSent, isFormSent, isError }) {
   const history = useHistory();
-  const { values, handleChange, errors, isValid } = UseFormValidation({
-    email: '',
-    password: '',
-  });
+  const { values, handleChange, errors, isValid, resetForm } = UseFormValidation();
+  const email = values.email;
+  const password = values.password;
 
   useEffect(() => {
     setError(false);
@@ -18,8 +17,7 @@ function Login({ onLogin, setError, setIsFormSent, isFormSent }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setIsFormSent(true);
-    const { email, password } = values;
-    onLogin(password, email);
+    onLogin({ password, email });
   };
 
   return (
@@ -29,13 +27,14 @@ function Login({ onLogin, setError, setIsFormSent, isFormSent }) {
         <h2 className="login__title">Рады видеть!</h2>
         <Form
           buttonText="Войти"
-          errorText="При попытке авторизации произошла ошибка."
+          errorText="Неверный логин или пароль"
           handleChange={handleChange}
           errors={errors}
           handlerSubmit={handleSubmit}
           values={values}
           isFormSent={isFormSent}
           isValid={isValid}
+          isError={isError}
         />
         <div className="login__bottom-container">
           <span className="login__bottom">Ещё не зарегистрированы?</span>
