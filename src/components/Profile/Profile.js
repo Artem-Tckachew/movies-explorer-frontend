@@ -31,7 +31,7 @@ function Profile({ handleSignOut, setCurrentUser, setSuccess, setError, isError,
 
   function handleUserUpdate(e) {
     e.preventDefault();
-    mainApi.patchProfileInfo(name, email)
+    mainApi.patchProfileInfo(email, name)
       .then((res) => {
         setCurrentUser(res);
         setSuccess(true);
