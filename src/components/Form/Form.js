@@ -2,12 +2,10 @@ import './Form.css'
 
 function Form({
   buttonText,
-  message,
   handlerSubmit,
   handleChange,
   isValid,
   isError,
-  setError,
   errorText,
   isFormSent,
   errors,

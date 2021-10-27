@@ -13,7 +13,7 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
 
   React.useEffect(() => {
     setError(false);
-  }, [history]);
+  }, [history, setError]);
 
   const handleSubmit = (evt) => {
     setIsFormSent(true);

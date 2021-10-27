@@ -6,13 +6,13 @@ import Form from '../Form/Form';
 
 function Login({ onLogin, setError, setIsFormSent, isFormSent, isError }) {
   const history = useHistory();
-  const { values, handleChange, errors, isValid, resetForm } = UseFormValidation();
+  const { values, handleChange, errors, isValid } = UseFormValidation();
   const email = values.email;
   const password = values.password;
 
   useEffect(() => {
     setError(false);
-  }, [history]);
+  }, [history, setError]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

@@ -38,8 +38,8 @@ export const signOut = () => {
   return fetch(`${BASE__URL}/signout`, {
     method: 'DELETE',
     credentials: 'include',
-  }).then(checkResponse);
-};
+  })
+}
 
 export const checkToken = () => {
   return fetch(`${BASE__URL}/users/me`, {

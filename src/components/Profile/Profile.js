@@ -1,6 +1,5 @@
 import './Profile.css'
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import UseFormValidation from '../UseFormValidation';
 import Header from '../Header/Header'
@@ -17,7 +16,7 @@ function Profile({ handleSignOut, setCurrentUser, setSuccess, setError, isError,
     if (name === currentUser.name && email === currentUser.email) {
       setIsValid(0)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, email])
 
 
@@ -71,7 +70,7 @@ function Profile({ handleSignOut, setCurrentUser, setSuccess, setError, isError,
           <span className="profile__error">{isError}</span>
           <button className="profile__submit-button" onClick={handleUserUpdate} disabled={!isValid} type="submit">Редактировать</button>
         </form>
-        <Link to="/" className="profile__exit-button" onClick={handleSignOut} type="button">Выйти из аккаунта</Link>
+        <button className="profile__exit-button" onClick={handleSignOut} type="button">Выйти из аккаунта</button>
       </div>
     </div>
   );

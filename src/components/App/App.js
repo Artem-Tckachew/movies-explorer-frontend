@@ -157,29 +157,31 @@ function App() {
       localStorage.removeItem('foundMovies');
       localStorage.removeItem('movies');
       setMovies([]);
+      setIsLoggedIn(false);
       setCurrentUser({ email: '', name: '' });
       history.push('/');
-      setIsLoggedIn(false);
-
+    })
+    .catch((err) => {
+      console.log(err)
     });
   };
 
-  const onRegister = (data) => {
+  function onRegister(data) {
     const { email, name, password } = data;
     auth.register(password, email, name)
       .then(() => {
-        onLogin({password, email});
+        onLogin({ password, email });
       })
       .catch((err) => {
         if (err === 409 || err === 401 || err === 400) {
           setIsRegisterError('Пользователь с таким email уже зарегестрирован');
         } else {
-          setIsRegisterError(err)
-          console.log(err)
+          setIsRegisterError(err);
+          console.log(err);
           setIsFormSent(false);
         };
       });
-  };
+  }
 
   const handleSearchMovies = async (searchValue) => {
     setIsSearchError(false);
@@ -244,12 +246,12 @@ function App() {
       })
       .catch((err) => {
         if (err === 401 || err === 400) {
-        console.log(err);
-        setIsLoginError('Неверный логин или пароль');
-      } else {
-        setIsLoginError('Сервер отдыхает')
-      }
-    })
+          console.log(err);
+          setIsLoginError('Неверный логин или пароль');
+        } else {
+          setIsLoginError('Сервер отдыхает')
+        }
+      })
   }
 
   return (
