@@ -1,5 +1,6 @@
 import './Profile.css'
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import UseFormValidation from '../UseFormValidation';
 import Header from '../Header/Header'
@@ -31,7 +32,7 @@ function Profile({ handleSignOut, setCurrentUser, setSuccess, setError, isError,
 
   function handleUserUpdate(e) {
     e.preventDefault();
-    mainApi.patchProfileInfo(email, name)
+    mainApi.patchProfileInfo(name, email)
       .then((res) => {
         setCurrentUser(res);
         setSuccess(true);
@@ -47,6 +48,7 @@ function Profile({ handleSignOut, setCurrentUser, setSuccess, setError, isError,
   }
 
   return (
+    <>
     <div className="profile">
       <Header isLoggedIn="true" />
       <div className="profile__container">
@@ -54,12 +56,12 @@ function Profile({ handleSignOut, setCurrentUser, setSuccess, setError, isError,
         <form className="profile__form" onSubmit={handleUserUpdate}>
           <label className="profile__input-container">
             <span className="profile__input-title" htmlFor="name">Имя</span>
-            <input placeholder="Имя" className="profile__input" id="name" name="name" onChange={onChange} defaultValue={currentUser.name} type="text" required autoComplete="off" minLength="2" maxLength="40" />
+            <input placeholder="Имя" className="profile__input" id="name" name="name" onChange={onChange} defaultValue={currentUser.name} type="text" required autoComplete="off" maxLength="40" />
           </label>
           <span className="profile__error">{errors.name}</span>
           <label className="profile__input-container">
             <span className="profile__input-title" htmlFor="email">E-mail</span>
-            <input placeholder="E-mail" name="email" id="email" type="email" className="profile__input" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" onChange={onChange} defaultValue={currentUser.email} required minLength="2" maxLength="40" />
+            <input placeholder="E-mail" name="email" id="email" type="email" className="profile__input" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" onChange={onChange} defaultValue={currentUser.email} maxLength="40" required />
           </label>
           <span className="profile__error">{errors.email}</span>
           {isSuccess ? (
@@ -70,9 +72,10 @@ function Profile({ handleSignOut, setCurrentUser, setSuccess, setError, isError,
           <span className="profile__error">{isError}</span>
           <button className="profile__submit-button" onClick={handleUserUpdate} disabled={!isValid} type="submit">Редактировать</button>
         </form>
-        <button className="profile__exit-button" onClick={handleSignOut} type="button">Выйти из аккаунта</button>
+        <Link to="/" className="profile__exit-button" onClick={handleSignOut} type="button">Выйти из аккаунта</Link>
       </div>
     </div>
+    </>
   );
 }
 export default Profile;

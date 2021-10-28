@@ -18,6 +18,7 @@ import * as mainApi from '../../utils/MainApi';
 import getMovies from '../../utils/MoviesApi';
 import searchMovies from '../../utils/searchMovies';
 import { shortDuration } from '../../utils/constans';
+import Preloader from '../Movies/Preloader/Preloader';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,7 +41,6 @@ function App() {
   const [isSearchError, setIsSearchError] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isContentReady, setIsContentReady] = useState(true);
   const [movies, setMovies] = useState(
     localStorage.getItem('foundMovies')
       ? JSON.parse(localStorage.getItem('foundMovies'))
@@ -275,8 +275,6 @@ function App() {
             isNotFound={isNotFound}
             handleSaveMovie={handleSaveMovie}
             deleteMovie={deleteMovie}
-            setIsContentReady={setIsContentReady}
-            isContentReady={isContentReady}
             handleChangeRadio={setIsShortFilmChecked}
 
           />

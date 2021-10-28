@@ -27,7 +27,7 @@ function checkResponse(res) {
     .then(res =>checkResponse(res))
   }
 
- export const patchProfileInfo = (name, email) => {
+  export const patchProfileInfo = (name, email) => {
     return fetch(`${BASE__URL}/users/me`, {
       method: "PATCH",
       credentials: 'include',
@@ -36,7 +36,7 @@ function checkResponse(res) {
       },
       body: JSON.stringify({ name, email })
     })
-    .then(res =>checkResponse(res))
+      .then(res => checkResponse(res))
   }
 
  export const saveMovie = (movie) => {

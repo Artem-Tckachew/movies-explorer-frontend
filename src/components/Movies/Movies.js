@@ -1,10 +1,9 @@
-import React from 'react';
 import './Movies.css';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList'
-import Preloader from './Preloader/Preloader'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Preloader from './Preloader/Preloader'
 
 function Movies(props) {
 
@@ -12,7 +11,7 @@ function Movies(props) {
     <>
       <Header isLoggedIn="true" />
       <div className="movies">
-        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} setIsContentReady={props.setIsContentReady} />
+        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} />
         {props.isLoading ? <Preloader /> : null}
         {props.isNotFound ? (
           <p className="movies__found-error">Ничего не найдено</p>
@@ -23,8 +22,7 @@ function Movies(props) {
             или сервер недоступен. Подождите немного и попробуйте ещё раз
           </p>
         ) : null}
-        { props.isContentReady?
-        <MoviesCardList isSaved={false} {...props} /> : <Preloader />}
+        <MoviesCardList isSaved={false} {...props} />
       </div>
       <Footer />
     </>
