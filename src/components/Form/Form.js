@@ -18,29 +18,28 @@ function Form({
       {children}
       <label className="form__input-container">
         <span className="form__input-title">E-mail</span>
-        <input  pattern='^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$'
+        <input
         required
         id='email'
         name='email'
         className='form__input'
-        minLength='2'
         onChange={handleChange}
-        type='email'
+        type="email"
         autoFocus
+        autoComplete="off"
         />
       </label>
         <span className="form__error">{errors.email}</span>
       <label className="form__input-container">
         <span className="form__input-title">Пароль</span>
         <input
-         required
-         id='password'
+         minLength="8"
          className='form__input'
-         minLength='8'
          type='password'
          onChange={handleChange}
          name='password'
          autoComplete='off'
+         required
         />
       </label>
         <span className="form__error">{errors.password}</span>

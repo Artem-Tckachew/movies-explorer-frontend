@@ -17,8 +17,13 @@ function Login({ onLogin, setError, setIsFormSent, isFormSent, isError }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setIsFormSent(true);
-    onLogin({ password, email });
+    onLogin({ email, password });
   };
+
+  function onChange(e) {
+    handleChange(e);
+    setError('');
+  }
 
   return (
     <div className="login">
@@ -28,10 +33,9 @@ function Login({ onLogin, setError, setIsFormSent, isFormSent, isError }) {
         <Form
           buttonText="Войти"
           errorText="Неверный логин или пароль"
-          handleChange={handleChange}
+          handleChange={onChange}
           errors={errors}
           handlerSubmit={handleSubmit}
-          values={values}
           isFormSent={isFormSent}
           isValid={isValid}
           isError={isError}

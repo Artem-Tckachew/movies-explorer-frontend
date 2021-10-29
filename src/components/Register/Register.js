@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import './Register.css'
 import { UseFormValidation } from '../UseFormValidation';
 import Form from '../Form/Form';
-
 function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) {
   const history = useHistory();
   const { values, handleChange, errors, isValid } = UseFormValidation();
@@ -15,10 +14,15 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
     setError(false);
   }, [history, setError]);
 
-  const handleSubmit = (evt) => {
+  function handleSubmit(e) {
     setIsFormSent(true);
-    evt.preventDefault();
-    onRegister({ name, email, password });
+    e.preventDefault();
+    onRegister({ email, password, name });
+  }
+
+  function onChange(e) {
+    handleChange(e);
+    setError('');
   }
 
   return (
@@ -31,18 +35,17 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
           message='Уже зарегистрированы?'
           route='/signin'
           linkText='Войти'
-          errorText="Пользователь с таким email уже зарегестрирован"
-          handleChange={handleChange}
+          errorText="При попытке регистрации произошла ошибка."
+          handleChange={onChange}
           errors={errors}
           handlerSubmit={handleSubmit}
-          values={values}
           isFormSent={isFormSent}
           isValid={isValid}
           isError={isError}
         >
           <label className="register__input-container">
             <span className="register__input-title">Имя</span>
-            <input onChange={handleChange} name="name" id="name" type="text" className='register__input' minLength='2' defaultValue="" required />
+            <input onChange={onChange} name="name" id="name" type="text" className='register__input' minLength='2' defaultValue="" required />
           </label>
           <span className="email-error register__error" id='name-error'>{errors.name || ''}</span>
         </Form>

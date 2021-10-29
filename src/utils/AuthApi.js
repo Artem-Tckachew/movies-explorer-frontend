@@ -1,27 +1,28 @@
 export const BASE__URL = 'https://artemtkachev.api.nomoredomains.monster';
 
-const checkResponse = (res) => {
-  if (res.ok) {
+function checkResponse(res) {
+  if(res.ok) {
     return res.json();
+  } else {
+    return Promise.reject(res.status);
   }
-  return Promise.reject(`Ошибка: ${res.status}`);
-};
+}
 
-export const register = (email, password, name) => {
+export const register = ( email, password, name ) => {
   return fetch(`${BASE__URL}/signup`, {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password, name })
+   method: "POST",
+   credentials: "include",
+   headers: {
+     "Content-Type": "application/json"
+   },
+   body: JSON.stringify({ email, password, name })
   })
 
-    .then(checkResponse);
+  .then (res=>checkResponse(res))
 
 }
 
-export const authorize = (email, password) => {
+export const authorize = ( email, password ) => {
   return fetch(`${BASE__URL}/signin`, {
     method: "POST",
     credentials: "include",
@@ -30,10 +31,9 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then(checkResponse);
+  .then(res =>checkResponse(res))
 
 }
-
 export const signOut = () => {
   return fetch(`${BASE__URL}/signout`, {
     method: 'DELETE',
@@ -45,5 +45,5 @@ export const checkToken = () => {
   return fetch(`${BASE__URL}/users/me`, {
     method: 'GET',
     credentials: 'include',
-  }).then(checkResponse);
+  }).then(res =>checkResponse(res))
 };

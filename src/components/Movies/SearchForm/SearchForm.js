@@ -1,14 +1,12 @@
 import React from 'react';
 import './SearchForm.css'
 import { UseFormValidation } from '../../UseFormValidation'
-
 function SearchForm({ handleSubmit, handleChangeRadio }) {
   const checked = React.useRef();
   const { values, handleChange, errors, isValid } = UseFormValidation({
     key: '',
   });
   const [searchError, setSearchError] = React.useState('');
-
   function handleSearchSubmit(evt) {
     evt.preventDefault();
     if (isValid) {
@@ -20,7 +18,6 @@ function SearchForm({ handleSubmit, handleChangeRadio }) {
       setSearchError('Нужно ввести ключевое слово');
     }
   }
-
   function change() {
     handleChangeRadio(checked.current.checked);
   }
@@ -60,5 +57,4 @@ function SearchForm({ handleSubmit, handleChangeRadio }) {
     </section>
   );
 }
-
 export default SearchForm;

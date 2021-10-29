@@ -18,8 +18,6 @@ import * as mainApi from '../../utils/MainApi';
 import getMovies from '../../utils/MoviesApi';
 import searchMovies from '../../utils/searchMovies';
 import { shortDuration } from '../../utils/constans';
-import Preloader from '../Movies/Preloader/Preloader';
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
@@ -41,12 +39,12 @@ function App() {
   const [isSearchError, setIsSearchError] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isContentReady, setIsContentReady] = useState(true);
   const [movies, setMovies] = useState(
     localStorage.getItem('foundMovies')
       ? JSON.parse(localStorage.getItem('foundMovies'))
       : []
   );
-
   const tokenCheck = React.useCallback(() => {
     auth
       .checkToken()
@@ -60,17 +58,14 @@ function App() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
-
   useEffect(() => {
     tokenCheck();
   }, [tokenCheck]);
-
   useEffect(() => {
     if (isLoggedIn) {
       history.push('/movies');
     }
   }, [isLoggedIn, history]);
-
   useEffect(() => {
     if (isLoggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
@@ -94,11 +89,9 @@ function App() {
   useEffect(() => {
     setIsNotFound(false);
   }, [isLoggedIn]);
-
   useEffect(() => {
     setIsUpdateSuccessful(false);
   }, [path]);
-
   const handleSearchSavedMovies = (searchValue) => {
     setIsOnlyCheckedSearch(false);
     if (!searchValue) {
@@ -112,21 +105,18 @@ function App() {
     );
     setFoundSavedMovies(movies);
   };
-
   useEffect(() => {
     if (savedKeyWord) {
       handleSearchSavedMovies(savedKeyWord);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies]);
-
   useEffect(() => {
     if (savedMovies.length || foundSavedMovies.length) {
       handleSearchSavedMovies(savedKeyWord);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortSavedFilmChecked]);
-
   const handleSearchMoviesChecked = () => {
     const isShort = isShortFilmChecked;
     const cards = JSON.parse(localStorage.getItem('foundMovies'));
@@ -143,15 +133,12 @@ function App() {
     setMovies(shortCards);
     setIsNotFound(!shortCards.length);
   };
-
   useEffect(() => {
-
     if (localStorage.getItem('foundMovies')) {
       handleSearchMoviesChecked();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortFilmChecked]);
-
   const handleSignOut = () => {
     auth.signOut().then(() => {
       localStorage.removeItem('foundMovies');
@@ -159,16 +146,14 @@ function App() {
       setMovies([]);
       setIsLoggedIn(false);
       setCurrentUser({ email: '', name: '' });
+      localStorage.clear();
       history.push('/');
-    })
-    .catch((err) => {
-      console.log(err)
     });
   };
-
-  function onRegister(data) {
-    const { email, name, password } = data;
-    auth.register(password, email, name)
+  const onRegister = (data) => {
+    const { password, email, name } = data;
+    auth
+      .register(password, email, name)
       .then(() => {
         onLogin({ password, email });
       })
@@ -176,12 +161,13 @@ function App() {
         if (err === 409 || err === 401 || err === 400) {
           setIsRegisterError('Пользователь с таким email уже зарегестрирован');
         } else {
-          setIsRegisterError(err);
-          console.log(err);
+          setIsRegisterError(err)
+          console.log(err)
           setIsFormSent(false);
         };
       });
-  }
+  };
+
 
   const handleSearchMovies = async (searchValue) => {
     setIsSearchError(false);
@@ -205,7 +191,6 @@ function App() {
       setIsSearchLoading(false);
     }
   };
-
   const handleSaveMovie = (movie) => {
     mainApi
       .saveMovie(movie)
@@ -217,7 +202,6 @@ function App() {
         console.error(err);
       });
   };
-
   const deleteMovie = (movie) => {
     let movieId = savedMovies.filter(
       (f) => f.movieId === movie.id || f.data?.movieId === movie.id
@@ -225,7 +209,6 @@ function App() {
     if (movieId) {
       movieId = movieId._id || movieId._id;
     }
-
     mainApi
       .removeMovie(movie.owner ? movie._id : movieId)
       .then((deleted) => {
@@ -236,24 +219,22 @@ function App() {
         console.error(err);
       });
   };
-
   const onLogin = (data) => {
     const { email, password } = data;
-    auth.authorize(password, email)
+    auth
+      .authorize(email, password)
       .then(() => {
         setIsLoggedIn(true);
         history.push('/movies');
       })
       .catch((err) => {
-        if (err === 401 || err === 400) {
-          console.log(err);
-          setIsLoginError('Неверный логин или пароль');
-        } else {
-          setIsLoginError('Сервер отдыхает')
-        }
+        console.log(err);
+        setIsLoginError(err);
       })
-  }
-
+      .finally(() => {
+        setIsFormSent(false);
+      });
+  };
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -275,6 +256,8 @@ function App() {
             isNotFound={isNotFound}
             handleSaveMovie={handleSaveMovie}
             deleteMovie={deleteMovie}
+            setIsContentReady={setIsContentReady}
+            isContentReady={isContentReady}
             handleChangeRadio={setIsShortFilmChecked}
 
           />
@@ -332,7 +315,5 @@ function App() {
       </CurrentUserContext.Provider>
     </div>
   );
-
 }
-
 export default App;
