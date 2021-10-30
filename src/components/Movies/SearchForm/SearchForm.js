@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchForm.css'
 import { UseFormValidation } from '../../UseFormValidation'
-function SearchForm({ handleSubmit, handleChangeRadio }) {
+function SearchForm({ handleSubmit, handleChangeRadio, setIsContentReady }) {
   const checked = React.useRef();
   const { values, handleChange, errors, isValid } = UseFormValidation({
     key: '',
@@ -12,6 +12,7 @@ function SearchForm({ handleSubmit, handleChangeRadio }) {
     if (isValid) {
       setSearchError('');
       handleSubmit(values.key);
+      setIsContentReady(false)
     } else if (values.key.length > 0) {
       setSearchError(errors.key);
     } else {

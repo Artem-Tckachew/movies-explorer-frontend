@@ -11,18 +11,20 @@ function Movies(props) {
     <>
       <Header isLoggedIn="true" />
       <div className="movies">
-        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} />
+        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} setIsContentReady={props.setIsContentReady} />
         {props.isLoading ? <Preloader /> : null}
         {props.isNotFound ? (
           <p className="movies__found-error">Ничего не найдено</p>
-        ) : null}
+         ) : null}
         {props.isError ? (
           <p className="movies__error">
             Во время запроса произошла ошибка. Возможно, проблема с соединением
             или сервер недоступен. Подождите немного и попробуйте ещё раз
           </p>
         ) : null}
-        <MoviesCardList isSaved={false} {...props} />
+        {props.isContentReady ?
+        <Preloader /> :
+        <MoviesCardList isSaved={false} {...props} />}
       </div>
       <Footer />
     </>
