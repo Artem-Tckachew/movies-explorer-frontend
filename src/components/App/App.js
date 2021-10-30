@@ -58,16 +58,12 @@ function App() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
+
   useEffect(() => {
     tokenCheck();
   }, [tokenCheck]);
+
   useEffect(() => {
-    if (isLoggedIn) {
-      history.push('/movies');
-    }
-  }, [isLoggedIn, history]);
-  useEffect(() => {
-    if (isLoggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
         .then(([userData, moviesData]) => {
           setCurrentUser(userData);
@@ -83,8 +79,7 @@ function App() {
           }
         })
         .catch((e) => console.log(e));
-    }
-  }, [history, isLoggedIn, path]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     setIsNotFound(false);
@@ -139,6 +134,7 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortFilmChecked]);
+
   const handleSignOut = () => {
     auth.signOut().then(() => {
       localStorage.removeItem('foundMovies');
@@ -146,10 +142,10 @@ function App() {
       setMovies([]);
       setIsLoggedIn(false);
       setCurrentUser({ email: '', name: '' });
-      localStorage.clear();
       history.push('/');
     });
   };
+
   const onRegister = (data) => {
     const { password, email, name } = data;
     auth
@@ -219,6 +215,7 @@ function App() {
         console.error(err);
       });
   };
+
   const onLogin = (data) => {
     const { email, password } = data;
     auth
@@ -235,6 +232,7 @@ function App() {
         setIsFormSent(false);
       });
   };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
