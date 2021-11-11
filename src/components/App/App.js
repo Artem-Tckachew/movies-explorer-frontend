@@ -147,11 +147,11 @@ function App() {
   };
 
   const onRegister = (data) => {
-    const { password, email, name } = data;
+    const { name, email, password } = data;
     auth
-      .register(password, email, name)
+      .register(name, email, password)
       .then(() => {
-        onLogin({ password, email });
+        onLogin({ email, password });
       })
       .catch((err) => {
         if (err === 409 || err === 401 || err === 400) {

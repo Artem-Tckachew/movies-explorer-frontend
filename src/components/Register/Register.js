@@ -17,7 +17,7 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
   function handleSubmit(e) {
     setIsFormSent(true);
     e.preventDefault();
-    onRegister({ email, password, name });
+    onRegister({ name, email, password });
   }
 
   function onChange(e) {
@@ -43,11 +43,11 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
           isValid={isValid}
           isError={isError}
         >
-          <label className="register__input-container">
-            <span className="register__input-title">Имя</span>
-            <input onChange={onChange} name="name" id="name" type="text" className='register__input' minLength='2' defaultValue="" required />
+          <label htmlFor='name' className="form__input-container">
+            <span className="form__input-title">Имя</span>
+            <input onChange={onChange} name="name" id="name" type="text" className='form__input' minLength='2' defaultValue="" required />
           </label>
-          <span className="email-error register__error" id='name-error'>{errors.name || ''}</span>
+          <span className="form__error" id='name-error'>{errors.name || ''}</span>
         </Form>
         <div className="register__bottom-container">
           <span className="register__bottom">Уже зарегистрированы?</span>

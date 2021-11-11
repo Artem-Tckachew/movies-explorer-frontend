@@ -8,14 +8,14 @@ function checkResponse(res) {
   }
 }
 
-export const register = ( email, password, name ) => {
+export const register = ( name, email, password ) => {
   return fetch(`${BASE__URL}/signup`, {
    method: "POST",
    credentials: "include",
    headers: {
      "Content-Type": "application/json"
    },
-   body: JSON.stringify({ email, password, name })
+   body: JSON.stringify({ name, email, password })
   })
 
   .then (res=>checkResponse(res))
