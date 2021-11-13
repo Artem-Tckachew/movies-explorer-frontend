@@ -1,46 +1,33 @@
-import React from 'react';
 import './Movies.css';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList'
-import Preloader from './Preloader/Preloader'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Preloader from './Preloader/Preloader'
 
-function Movies() {
-  const [isLoading, setIsLoading] = React.useState(true);
-  setTimeout(() => { setIsLoading(false) }, 3000)
-  const cards = [
-    {
-      "image": "https://proprikol.ru/wp-content/uploads/2020/09/kartinki-mstiteli-27.jpg",
-      "duration": 137,
-      "nameRU": "Мстители"
-    },
-    {
-      "image": "https://pic.rutube.ru/video/6f/8d/6f8da78b42ffb66d69e955a46bf703e1.jpg",
-      "duration": 143,
-      "nameRU": "Трансформеры"
-    },
-    {
-      "image": "https://proprikol.ru/wp-content/uploads/2020/09/kartinki-mstiteli-27.jpg",
-      "duration": 137,
-      "nameRU": "МстителиМстителиМстителиМстители"
-    },
-    {
-      "image": "https://pic.rutube.ru/video/6f/8d/6f8da78b42ffb66d69e955a46bf703e1.jpg",
-      "duration": 143,
-      "nameRU": "ТрансформерыТрансформерыТрансформеры"
-    }
-  ]
+function Movies(props) {
 
   return (
-    <div className="movies">
-      <Header isAuth={true} />
-      <SearchForm />
-      {!isLoading ?
-        (<MoviesCardList isSaved={false} cards={cards} />) :
-        (<Preloader />)}
+    <>
+      <Header isLoggedIn="true" />
+      <div className="movies">
+        <SearchForm handleSubmit={props.handleSubmit} handleChangeRadio={props.handleChangeRadio} setIsContentReady={props.setIsContentReady} />
+        {props.isLoading ? <Preloader /> : null}
+        {props.isNotFound ? (
+          <p className="movies__found-error">Ничего не найдено</p>
+         ) : null}
+        {props.isError ? (
+          <p className="movies__error">
+            Во время запроса произошла ошибка. Возможно, проблема с соединением
+            или сервер недоступен. Подождите немного и попробуйте ещё раз
+          </p>
+        ) : null}
+        {props.isContentReady ?
+        <Preloader /> :
+        <MoviesCardList isSaved={false} {...props} />}
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

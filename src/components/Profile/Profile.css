@@ -73,6 +73,28 @@
   color: #FFFFFF;
 }
 
+.profile__success{
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FFFFFF;
+  padding: 6px 0;
+}
+
+.profile__error {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  padding: 6px 0;
+}
+
 .profile__submit-button {
   margin-top: 220px;
   width: 100%;
@@ -87,6 +109,11 @@
   padding: 0;
   transition: 0.7s ease opacity;
   opacity: 1;
+}
+
+.profile__submit-button:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 .profile__exit-button {
