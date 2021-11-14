@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import './Register.css'
 import { UseFormValidation } from '../UseFormValidation';
 import Form from '../Form/Form';
-function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) {
+function Register({ onRegister, setError, setIsFormSent, isError, isFormSent, children }) {
   const history = useHistory();
   const { values, handleChange, errors, isValid } = UseFormValidation();
   const email = values.email;
@@ -17,7 +17,7 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
   function handleSubmit(e) {
     setIsFormSent(true);
     e.preventDefault();
-    onRegister({ name, email, password });
+    onRegister({ email, password, name });
   }
 
   function onChange(e) {
@@ -43,11 +43,11 @@ function Register({ onRegister, setError, setIsFormSent, isError, isFormSent }) 
           isValid={isValid}
           isError={isError}
         >
-          <label htmlFor='name' className="form__input-container">
-            <span className="form__input-title">Имя</span>
-            <input onChange={onChange} name="name" id="name" type="text" className='form__input' minLength='2' defaultValue="" required />
+          <label className="register__input-container">
+            <span className="register__input-title">Имя</span>
+            <input onChange={onChange} name="name" id="name" type="text" className='form__input register__input' minLength='2' defaultValue="" required />
           </label>
-          <span className="form__error" id='name-error'>{errors.name || ''}</span>
+          <span className="email-error register__error" id='name-error'>{errors.name || ''}</span>
         </Form>
         <div className="register__bottom-container">
           <span className="register__bottom">Уже зарегистрированы?</span>

@@ -1,7 +1,7 @@
 import '../../index.css';
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation, Redirect } from 'react-router-dom';
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -39,7 +39,6 @@ function App() {
   const [isSearchError, setIsSearchError] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isContentReady, setIsContentReady] = useState(true);
   const [movies, setMovies] = useState(
     localStorage.getItem('foundMovies')
       ? JSON.parse(localStorage.getItem('foundMovies'))
@@ -64,21 +63,21 @@ function App() {
   }, [tokenCheck]);
 
   useEffect(() => {
-      Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
-        .then(([userData, moviesData]) => {
-          setCurrentUser(userData);
-          setSavedMovies(moviesData);
-          setSavedMoviesId(moviesData.map((movie) => movie.movieId));
-          setIsLoggedIn(true);
-          if (path === "/profile") {
-            history.push('/profile')
-          } else if (path === "/movies") {
-            history.push('/movies')
-          } else if (path === "/saved-movies") {
-            history.push('saved-movies')
-          }
-        })
-        .catch((e) => console.log(e));
+    Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
+      .then(([userData, moviesData]) => {
+        setCurrentUser(userData);
+        setSavedMovies(moviesData);
+        setSavedMoviesId(moviesData.map((movie) => movie.movieId));
+        setIsLoggedIn(true);
+        if (path === "/profile") {
+          history.push('/profile')
+        } else if (path === "/movies") {
+          history.push('/movies')
+        } else if (path === "/saved-movies") {
+          history.push('saved-movies')
+        }
+      })
+      .catch((e) => console.log(e));
   }, [isLoggedIn]);
 
   useEffect(() => {
@@ -254,10 +253,7 @@ function App() {
             isNotFound={isNotFound}
             handleSaveMovie={handleSaveMovie}
             deleteMovie={deleteMovie}
-            setIsContentReady={setIsContentReady}
-            isContentReady={isContentReady}
             handleChangeRadio={setIsShortFilmChecked}
-
           />
           <ProtectedRoute
             component={SavedMovies}
@@ -289,22 +285,28 @@ function App() {
             setSuccess={setIsUpdateSuccessful}
           />
           <Route path='/signup'>
-            <Register
-              onRegister={onRegister}
-              isError={isRegisterError}
-              setError={setIsRegisterError}
-              isFormSent={isFormSent}
-              setIsFormSent={setIsFormSent}
-            />
+            {isLoggedIn ? (<Redirect to="/movies" />
+            ) : (
+              <Register
+                onRegister={onRegister}
+                isError={isRegisterError}
+                setError={setIsRegisterError}
+                isFormSent={isFormSent}
+                setIsFormSent={setIsFormSent}
+              />
+            )}
           </Route>
           <Route path='/signin'>
-            <Login
-              onLogin={onLogin}
-              isError={isLoginError}
-              setError={setIsLoginError}
-              isFormSent={isFormSent}
-              setIsFormSent={setIsFormSent}
-            />
+            {isLoggedIn ? (<Redirect to="/movies" />
+            ) : (
+              <Login
+                onLogin={onLogin}
+                isError={isLoginError}
+                setError={setIsLoginError}
+                isFormSent={isFormSent}
+                setIsFormSent={setIsFormSent}
+              />
+            )}
           </Route>
           <Route path="*">
             <NotFound />

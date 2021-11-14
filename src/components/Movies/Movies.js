@@ -22,9 +22,7 @@ function Movies(props) {
             или сервер недоступен. Подождите немного и попробуйте ещё раз
           </p>
         ) : null}
-        {props.isContentReady ?
-        <Preloader /> :
-        <MoviesCardList isSaved={false} {...props} />}
+        <MoviesCardList isSaved={false} {...props} />
       </div>
       <Footer />
     </>
